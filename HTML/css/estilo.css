@@ -1,0 +1,46 @@
+body {
+    background-color: #fff9e2;
+}
+
+#mensajeError {
+    color: rgba(255, 0, 0, 0.723);
+    font-weight: bold;
+}
+
+.subrayadoNav {
+    display: inline-block;
+    position: relative;
+    color: #ffffff;
+    text-decoration: none;
+}
+.subrayadoNav:after {
+    content: "";
+    display: block;
+    margin: auto;
+    height: 2px;
+    width: 0px;
+    transition: all .8s;
+}
+.subrayadoNav:hover:after {
+    width: 100%;
+    background: #ffffff;
+}
+
+#linkRedireccionAlta {
+    color: rgb(109, 97, 42); 
+    font-weight: 500;
+}
+
+.box2 {
+    transition: all ease 0.2s;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.box2:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.25);
+}
+
+.columnaCentral {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+}

@@ -82,7 +82,7 @@ include("../PHP/Reserva/CodigoReserva3.php");
             <h1 class="pb-5">Elige un método de pago</h1>
 
             <!-- INFO DE LA RESERVA -->
-            <div class="container-fluid" style="width: 90%; background-color: #e6e6e6; border-radius: 2px;">
+            <div class="container-fluid mb-5" style="width: 90%; background-color: #e6e6e6; border-radius: 10px;">
                 <table class="table">
                     <thead>
                         <tr>
@@ -98,9 +98,9 @@ include("../PHP/Reserva/CodigoReserva3.php");
                             <td>...</td>
                         </tr>
                         <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
+                            <td></td>
+                            <th scope="row" colspan="2">SUBTOTAL</th>
+                            <td> ...</td>
                         </tr>
                     </tbody>
                 </table>

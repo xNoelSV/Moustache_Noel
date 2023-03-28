@@ -74,10 +74,9 @@ include("../PHP/Reserva/CodigoReserva2.php");
     </div>-->
 
     <form method="POST">
-        
 
-        <input type="submit"
-            class="btn btn-lg btn-warning w-25 position-fixed top-100 start-50 translate-middle box2"
+
+        <input type="submit" class="btn btn-lg btn-warning w-25 position-fixed top-100 start-50 translate-middle box2"
             style="margin-top: -45px;" name="volverReserva2" value="Volver" />
     </form>
 
@@ -88,6 +87,16 @@ include("../PHP/Reserva/CodigoReserva2.php");
             viewBox="0 0 16 16">
             <path
                 d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z" />
+        </svg>
+    </button>
+
+    <!-- BOTÓN TEMPORAL QUE LLEVA A LA RESERVA 3 -->
+    <button class="btn btn-dark" onclick="irReserva3()" id="volverArriba" title="Ir arriba"
+        style="position: fixed; bottom: 20px; left: 30px; z-index: 99;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-arrow-90deg-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M14.854 4.854a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 4H3.5A2.5 2.5 0 0 0 1 6.5v8a.5.5 0 0 0 1 0v-8A1.5 1.5 0 0 1 3.5 5h9.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4z" />
         </svg>
     </button>
 </body>

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.3.0-dev+20221125.2e001c186a
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-03-2023 a las 20:04:00
+-- Tiempo de generación: 28-03-2023 a las 12:20:34
 -- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.5
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `moustache`
 --
+CREATE DATABASE IF NOT EXISTS `moustache` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `moustache`;
 
 -- --------------------------------------------------------
 

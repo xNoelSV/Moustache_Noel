@@ -2,14 +2,12 @@
 $_SESSION['servicio'] = "Pelo";
 
 /*
-if ((empty($_SESSION['queryReserva'])) || (empty($_SESSION['horaSeleccionada']))) {
-    if (empty($_SESSION['queryReserva'])) {
-        header('Location: Reserva1.php');
-    } else {
-        header('Location: Reserva2.php');
-    }
-    
+if (empty($_POST['fechaReserva'])) {
+    header('Location: Reserva2.php');
+} */
+
+if (isset($_POST['volverReserva3'])) {
+    header('Location: Reserva2.php');
 }
-*/
 
 ?>

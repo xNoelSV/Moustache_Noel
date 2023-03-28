@@ -76,6 +76,7 @@ include("../PHP/Reserva/CodigoReserva2.php");
     <form method="POST">
 
 
+        <!-- BOTÓN VOLVER -->
         <input type="submit" class="btn btn-lg btn-warning w-25 position-fixed top-100 start-50 translate-middle box2"
             style="margin-top: -45px;" name="volverReserva2" value="Volver" />
     </form>
@@ -91,7 +92,7 @@ include("../PHP/Reserva/CodigoReserva2.php");
     </button>
 
     <!-- BOTÓN TEMPORAL QUE LLEVA A LA RESERVA 3 -->
-    <button class="btn btn-dark" onclick="irReserva3()" id="volverArriba" title="Ir arriba"
+    <button class="btn btn-dark" onclick="irReserva3()" id="volverArriba" title="Ir a Reserva3.php"
         style="position: fixed; bottom: 20px; left: 30px; z-index: 99;">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
             class="bi bi-arrow-90deg-right" viewBox="0 0 16 16">

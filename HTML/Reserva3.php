@@ -118,7 +118,7 @@ include("../PHP/Reserva/CodigoReserva3.php");
             </div>-->
 
             <!-- INFO DE LA RESERVA 2 -->
-            
+
 
             <!--
             <div class="container">
@@ -256,6 +256,13 @@ include("../PHP/Reserva/CodigoReserva3.php");
                         initPayPalButton();
                     </script>
             <?php } ?>
+
+            <form method="POST">
+                <!-- BOTÓN VOLVER -->
+                <input type="submit" class="btn btn-lg btn-warning w-50 box2 mt-5"
+                    name="volverReserva3" value="Volver" />
+            </form>
+
         </div>
     </div>
 

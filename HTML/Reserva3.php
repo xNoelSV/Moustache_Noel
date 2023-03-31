@@ -75,9 +75,9 @@ include("../PHP/Reserva/CodigoReserva3.php");
     </header>
 
     <!-- MÉTODO DE PAGO -->
-    <div class="container-fluid p-5 pt-5 z-0 columnaCentral h-100"
+    <div class="container-fluid pt-5 p-0 z-0 columnaCentral h-100"
         style="width: 65%; background-color: #e8d1b5; margin: 0 auto;">
-        <div class="container-fluid w-100 pt-5 z-1" style="background-color: #e8d1b5; margin: 0 auto;">
+        <div class="container-fluid pt-5 z-1" style="background-color: #e8d1b5;">
             <h1 class="display-5">Paso 3.</h1>
             <h1 class="pb-5">Elige un método de pago</h1>
 

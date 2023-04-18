@@ -67,50 +67,49 @@ include("../PHP/Reserva/CodigoReserva1.php");
     </div>
 
     <!-- SERVICIOS -->
-    <div class="container-fluid mt-5">
-        <div class="row row-cols-1 row-cols-md-2 mb-3">
-            <div class="col">
-                <div class="card mb-4 w-75 mx-auto box2 border-0"
-                    style=" background-color: #e8d1b5;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;">
-                    <img src="../IMG/Servicios1.jpg" class="card-img-top mb-3">
-                    <div class="card-body">
-                        <h2 class="card-title mb-4">Corte de pelo</h2>
-                        <p class="card-text mb-4">Ofrecemos una amplia variedad de estilos de corte de pelo, desde
-                            los
-                            más clásicos hasta los más modernos, para que puedas encontrar el que mejor se adapte a
-                            ti.
-                            Además, nos aseguramos de que cada corte de pelo venga con un lavado y acondicionamiento
-                            del
-                            cabello, para que puedas salir sintiéndote y luciendo mejor que nunca.</p>
-                        <form method="POST">
+    <form method="POST">
+        <div class="container-fluid mt-5">
+            <div class="row row-cols-1 row-cols-md-2 mb-3">
+                <div class="col">
+                    <div class="card mb-4 w-75 mx-auto box2 border-0"
+                        style=" background-color: #e8d1b5;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;">
+                        <img src="../IMG/Servicios1.jpg" class="card-img-top mb-3">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Corte de pelo</h2>
+                            <p class="card-text mb-4">Ofrecemos una amplia variedad de estilos de corte de pelo, desde
+                                los
+                                más clásicos hasta los más modernos, para que puedas encontrar el que mejor se adapte a
+                                ti.
+                                Además, nos aseguramos de que cada corte de pelo venga con un lavado y acondicionamiento
+                                del
+                                cabello, para que puedas salir sintiéndote y luciendo mejor que nunca.</p>
+
                             <input type="submit" name="ReservaPelo" class="w-100 btn btn-lg btn-warning fw-medium"
                                 value="21.50€" />
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card mb-4 w-75 mx-auto box2 border-0"
-                    style="background-color: #e8d1b5; box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;">
-                    <img src="../IMG/Servicios2.jpg" class="card-img-top mb-3">
-                    <div class="card-body">
-                        <h2 class="card-title mb-4">Retocado de barba</h2>
-                        <p class="card-text mb-4">Ofrecemos una amplia variedad de servicios de cuidado personal
-                            para la
-                            barba, desde recortes y estilismos hasta afeitados completos. Además, utilizamos los
-                            mejores
-                            productos de cuidado de la piel y de la barba para asegurarnos de que tu piel y barba
-                            estén
-                            siempre bien hidratadas y protegidas.</p>
-                        <form method="POST">
-                            <input type="submit" name="ReservaPelo" class="w-100 btn btn-lg btn-warning fw-medium"
+                <div class="col">
+                    <div class="card mb-4 w-75 mx-auto box2 border-0"
+                        style="background-color: #e8d1b5; box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;">
+                        <img src="../IMG/Servicios2.jpg" class="card-img-top mb-3">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Retocado de barba</h2>
+                            <p class="card-text mb-4">Ofrecemos una amplia variedad de servicios de cuidado personal
+                                para la
+                                barba, desde recortes y estilismos hasta afeitados completos. Además, utilizamos los
+                                mejores
+                                productos de cuidado de la piel y de la barba para asegurarnos de que tu piel y barba
+                                estén
+                                siempre bien hidratadas y protegidas.</p>
+                            <input type="submit" name="ReservaBarba" class="w-100 btn btn-lg btn-warning fw-medium"
                                 value="11.50€" />
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 
     <!-- BOTÓN "VOLVER ARRIBA" -->
     <button class="btn btn-dark" onclick="topFunction()" id="volverArriba" title="Ir arriba"

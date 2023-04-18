@@ -35,7 +35,7 @@ if (isset($_POST['btnUsuSignup'])) {
             $stmt->bindParam(4, $pass);
 
             $stmt->execute();
-            header('Location: ../../HTML/Login.php');
+            header('Location: Login.php');
         }
     }
 }

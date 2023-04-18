@@ -1,5 +1,4 @@
 <?php
-$_SESSION['servicio'] = "Pelo";
 
 /*
 if (empty($_POST['fechaReserva'])) {

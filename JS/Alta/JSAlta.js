@@ -52,7 +52,7 @@ function respuestaServidor() {
 }
 
 function estadoCheckbox() {
-    if(document.getElementById("terms").checked == true) {
+    if (document.getElementById("terms").checked == true) {
         checkboxRellenado = true;
         habilitarLogin();
     } else {
@@ -62,7 +62,7 @@ function estadoCheckbox() {
 }
 
 function habilitarLogin() {
-    if ((correoRellenado==true) && (checkboxRellenado==true)) {
+    if ((correoRellenado == true) && (checkboxRellenado == true)) {
         document.getElementById("btnRegistrar").disabled = false;
     } else {
         document.getElementById("btnRegistrar").disabled = true;
@@ -77,13 +77,18 @@ function comprobarEstadoInputs(numeroInput) {
             inputRellenado.className = "form-control";
             divInput.removeChild(document.getElementById("errorNombre"));
         }
-        if(inputRellenado.value == "") {
+        if (inputRellenado.value == "") {
             inputRellenado.className = "form-control is-invalid"
             let error = document.createElement("div");
             error.className = "invalid-feedback";
             error.id = "errorNombre";
             error.innerHTML = "Rellene el campo porfavor.";
             document.getElementById("nameUsu").appendChild(error);
+        } else {
+            if ($(inputRellenado).hasClass("is-invalid")) {
+                $(inputRellenado).removeClass("is-invalid");   
+            }
+            $(inputRellenado).addClass("is-valid");
         }
     } else if (numeroInput == 2) {
         let inputRellenado = document.getElementById("surnameUsuSignup");
@@ -92,14 +97,19 @@ function comprobarEstadoInputs(numeroInput) {
             inputRellenado.className = "form-control";
             divInput.removeChild(document.getElementById("errorApellido"));
         }
-        if(inputRellenado.value == "") {
+        if (inputRellenado.value == "") {
             inputRellenado.className = "form-control is-invalid"
             let error = document.createElement("div");
             error.className = "invalid-feedback";
             error.id = "errorApellido";
             error.innerHTML = "Rellene el campo porfavor.";
             document.getElementById("surnameUsu").appendChild(error);
-        } 
+        } else {
+            if ($(inputRellenado).hasClass("is-invalid")) {
+                $(inputRellenado).removeClass("is-invalid");   
+            }
+            $(inputRellenado).addClass("is-valid");
+        }
     } else if (numeroInput == 3) {
         let inputRellenado = document.getElementById("passUsuSignup");
         let divInput = document.getElementById("passUsu");
@@ -107,7 +117,7 @@ function comprobarEstadoInputs(numeroInput) {
             inputRellenado.className = "form-control";
             divInput.removeChild(document.getElementById("errorPass"));
         }
-        if(inputRellenado.value == "") {
+        if (inputRellenado.value == "") {
             inputRellenado.className = "form-control is-invalid"
             let error = document.createElement("div");
             error.className = "invalid-feedback";
@@ -122,7 +132,7 @@ function comprobarEstadoInputs(numeroInput) {
             inputRellenado.className = "form-control";
             divInput.removeChild(document.getElementById("errorPass2"));
         }
-        if(inputRellenado.value == "") {
+        if (inputRellenado.value == "") {
             inputRellenado.className = "form-control is-invalid"
             let error = document.createElement("div");
             error.className = "invalid-feedback";

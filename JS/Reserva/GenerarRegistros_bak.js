@@ -1,7 +1,8 @@
 var fechaHoy = 0;
 var fechaComoCadena = 0;
 var fechaComoCadenaModificada = 0;
-var fechaComoCadenaInicioSemana = 0;
+var diasSumar = 0;
+var totalDias = 0;
 var clicks = 0;
 
 window.onload = cargarFechaInicio();
@@ -9,33 +10,25 @@ function cargarFechaInicio() {
     fechaHoy = Date.now();
     fechaComoCadena = new Date(fechaHoy);
     fechaComoCadenaModificada = new Date(fechaHoy);
-    fechaComoCadenaInicioSemana = new Date(fechaHoy);
 }
 
-function CargarRegistros(accion, servicio) {
+function CargarRegistros(dias, servicio) {
 
     // Obtiene el dia de la semana en el que nos encontramos
     var numeroDia = parseInt(new Date(fechaComoCadena).getDay());
 
     // Avanza o retrocede (o deja igual) la semana en la que se encuentra el usuario.
-    if (accion == "delante") {
-        fechaComoCadena.setDate(fechaComoCadena.getDate() +7);
-    } else if (accion == "atras") {
-        fechaComoCadena.setDate(fechaComoCadena.getDate() -7);
-    }
+    fechaComoCadena.setDate(fechaComoCadena.getDate() + dias);
     
-    // Le da el valor inicial de la semana correspondiente a la fechaComoCadenaInicioSemana
-    fechaComoCadenaInicioSemana.setDate(fechaComoCadena.getDate() - (numeroDia-1));
+    // Le da el valor inicial de la semana correspondiente a la fechaModificada
+    fechaComoCadenaModificada.setDate(fechaComoCadena.getDate());
 
     // Selecciona el mes en el que se encuentra
     var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     var nombreMes = meses[new Date(fechaComoCadena).getMonth()];
-    var nombreMesModificado = meses[new Date(fechaComoCadena).getMonth()];
-
-    // Se le da el valor del primer dia de la semana a la cadena
-    var stringFecha = parseInt(fechaComoCadenaInicioSemana.getDate());
 
     // Si es domingo, se pasa a la semana siguiente (dia actual (domingo) = 1 (lunes))
+    var stringFecha = "";
     if (numeroDia == 0) {
         fechaComoCadena.setDate(fechaComoCadena.getDate() + 1);
         numeroDia = 1;
@@ -45,70 +38,78 @@ function CargarRegistros(accion, servicio) {
     if (numeroDia == 1) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 6);
-        if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMes = meses[new Date(fechaComoCadena).getMonth() -1];
-        }
-        stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
+        var nombreMesModificado = meses[new Date(fechaComoCadenaModificada).getMonth()];
+        stringFecha = parseInt(fechaComoCadena.getDate()) + " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
         
+        // Días de la semana que se van a sumar a la fecha
+        diasSumar = [0, 1, 2, 3, 4, 5, 6];
     } else if (numeroDia == 2) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 5);
-        if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMes = meses[new Date(fechaComoCadena).getMonth() -1];
-        }
-        stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
+        var nombreMesModificado = meses[new Date(fechaComoCadenaModificada).getMonth()];
+        stringFecha = parseInt(fechaComoCadena.getDate() - 1) + " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
+        // Días de la semana que se van a sumar a la fecha
+        diasSumar = [-1, 0, 1, 2, 3, 4, 5];
     } else if (numeroDia == 3) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 4);
-        if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMes = meses[new Date(fechaComoCadena).getMonth() -1];
-        } 
-        stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
+        var nombreMesModificado = meses[new Date(fechaComoCadenaModificada).getMonth()];
+        stringFecha = parseInt(fechaComoCadena.getDate() - 2) + " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
+        // Días de la semana que se van a sumar a la fecha
+        diasSumar = [-2, -1, 0, 1, 2, 3, 4];
     } else if (numeroDia == 4) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 3);
-        if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMes = meses[new Date(fechaComoCadena).getMonth() -1];
-        }
-        stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
-        
+        var nombreMesModificado = meses[new Date(fechaComoCadenaModificada).getMonth()];
+        stringFecha = parseInt(fechaComoCadena.getDate() - 3) + " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
+
+        // Días de la semana que se van a sumar a la fecha
+        diasSumar = [-3, -2, -1, 0, 1, 2, 3];
     } else if (numeroDia == 5) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 2);
-        if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMes = meses[new Date(fechaComoCadena).getMonth() -1];
-        }
-        stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
+        var nombreMesModificado = meses[new Date(fechaComoCadenaModificada).getMonth()];
+        stringFecha = parseInt(fechaComoCadena.getDate() - 4) + " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
+        // Días de la semana que se van a sumar a la fecha
+        diasSumar = [-4, -3, -2, -1, 0, 1, 2];
     } else if (numeroDia == 6) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 1);
-        if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMes = meses[new Date(fechaComoCadena).getMonth() -1];
-        }
-        stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
+        var nombreMesModificado = meses[new Date(fechaComoCadenaModificada).getMonth()];
+        stringFecha = parseInt(fechaComoCadena.getDate() - 5) + " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
+        // Días de la semana que se van a sumar a la fecha
+        diasSumar = [-5, -4, -3, -2, -1, 0, 1];
     }
-
-    fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() - (numeroDia-1));
     
     // Generación de los textos en la parte superior de cada columna
     var nombresSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
     var nombresSemanaSinTilde = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+    fechaComoCadenaModificada.setDate(fechaComoCadena.getDate());
+    var diaEnCola = fechaComoCadenaModificada.getDate();
     for (i = 0; i < 7; i++) {
+        fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + diasSumar[i]);
+        if (fechaComoCadenaModificada.getDate() != diaEnCola+1) {
+            fechaComoCadenaModificada
+        }
+        /* Hace comprobaciones para que el día coincida con su correspondiente día de la semana.
+        if ((fechaComoCadenaModificada.getDate() == (diaEnCola+diasSumar[i])) || (fechaComoCadenaModificada.getDate() == diaEnCola+2)) {
+            fechaComoCadenaModificada.setDate(diaEnCola + 1);
+        }*/
         document.getElementById("textoColumna" + nombresSemanaSinTilde[i]).innerHTML = nombresSemana[i] + " " + fechaComoCadenaModificada.getDate();
-        fechaComoCadenaModificada.setDate(fechaComoCadenaModificada.getDate() + 1);
+        diaEnCola = fechaComoCadenaModificada.getDate();
     }
 
     // Imprime la semana en la parte superior del calendario
-    document.getElementById("semanaCorrespondiente").innerHTML = "Semana: " + stringFecha + " del " + new Date(fechaComoCadenaModificada).getFullYear();
+    document.getElementById("semanaCorrespondiente").innerHTML = "Semana: " + stringFecha + " del " + new Date(fechaComoCadena).getFullYear();
 
     // Gestiona los clicks que avanzan y retroceden las semanas
-    if (accion == "atras") {
+    if (dias < 0) {
         clicks--;
-    } else if (accion == "delante") {
+    } else if (dias > 0) {
         clicks++;
     }
 
@@ -118,7 +119,7 @@ function CargarRegistros(accion, servicio) {
         $("#semanaAnterior").prop("disabled", false);
     }
 
-    if (clicks == 40) {
+    if (clicks == 16) {
         $("#semanaSiguiente").prop("disabled", true);
     } else {
         $("#semanaSiguiente").prop("disabled", false);
@@ -358,6 +359,7 @@ function AbrirModal(botonPresionado, textoColumna) {
     let dia = botonPresionado.id;
 
     let columnaSeparada = document.getElementById(textoColumna).innerHTML;
+    console.log(columnaSeparada);
     let columna = columnaSeparada.split(" ");
     let stringModal = "¿Quieres reservar para el " + columna[0] + " " + columna[1] + " a las " + $(botonPresionado).val() + "?";
     $("#textoModal").text(stringModal);

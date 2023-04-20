@@ -24,7 +24,7 @@ include("../PHP/Reserva/ComprobarReserva.php");
 include("../PHP/Reserva/CodigoReserva2.php");
 ?>
 
-<body class="text-center" data-hasqtip="0" <?php if ($_SESSION['servicio'] == "Pelo") { ?>onload="CargarRegistros(0, 'Pelo')" <?php } else if ($_SESSION['servicio'] == "Barba") { ?>onload="CargarRegistros(0, 'Barba')" <?php } ?>>
+<body class="text-center" data-hasqtip="0" <?php if ($_SESSION['servicio'] == "Pelo") { ?>onload="CargarRegistros('', 'Pelo')" <?php } else if ($_SESSION['servicio'] == "Barba") { ?>onload="CargarRegistros('', 'Barba')" <?php } ?>>
 
     <!-- NAV BAR 2 -->
     <header class="p-3 text-bg-dark">
@@ -76,13 +76,13 @@ include("../PHP/Reserva/CodigoReserva2.php");
         <div class="container ps-5 pe-5 mt-5 w-100 mb-5 pb-5" id="tablaRegistros">
             <div class="mb-3" id="btnsCambiarSemana">
                 <h3 id="semanaCorrespondiente"></h3>
-                <button class="btn btn-secondary d-inline-flex align-items-center" id="semanaAnterior" type="button" <?php if ($_SESSION['servicio'] == "Pelo") { ?>onclick="CargarRegistros(-7, 'Pelo', +6, +5, +4, +3, +2, +1)" <?php } else if ($_SESSION['servicio'] == "Barba") { ?>onclick="CargarRegistros(-7, 'Barba')" <?php } ?>>
+                <button class="btn btn-secondary d-inline-flex align-items-center" id="semanaAnterior" type="button" <?php if ($_SESSION['servicio'] == "Pelo") { ?>onclick="CargarRegistros('atras', 'Pelo')" <?php } else if ($_SESSION['servicio'] == "Barba") { ?>onclick="CargarRegistros('atras', 'Barba')" <?php } ?>>
                     <svg class="bi me-1" width="20" height="20" fill="currentColor">
                         <use xlink:href="#arrow-left-short"></use>
                     </svg>
                     Semana anterior
                 </button>
-                <button class="btn btn-secondary d-inline-flex align-items-center" id="semanaSiguiente" type="button" <?php if ($_SESSION['servicio'] == "Pelo") { ?>onclick="CargarRegistros(+7, 'Pelo', +6, +5, +4, +3, +2, +1)" <?php } else if ($_SESSION['servicio'] == "Barba") { ?>onclick="CargarRegistros(+7, 'Barba')" <?php } ?>>
+                <button class="btn btn-secondary d-inline-flex align-items-center" id="semanaSiguiente" type="button" <?php if ($_SESSION['servicio'] == "Pelo") { ?>onclick="CargarRegistros('delante', 'Pelo')" <?php } else if ($_SESSION['servicio'] == "Barba") { ?>onclick="CargarRegistros('delante', 'Barba')" <?php } ?>>
                     Semana siguiente
                     <svg class="bi ms-1" width="20" height="20" fill="currentColor">
                         <use xlink:href="#arrow-right-short"></use>

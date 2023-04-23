@@ -26,7 +26,7 @@ include("../PHP/Reserva/CodigoReserva2.php");
 
 <body class="text-center" data-hasqtip="0" <?php if ($_SESSION['servicio'] == "Pelo") { ?>onload="CargarRegistros('', 'Pelo')" <?php } else if ($_SESSION['servicio'] == "Barba") { ?>onload="CargarRegistros('', 'Barba')" <?php } ?>>
 
-    <!-- NAV BAR 2 -->
+    <!-- NAV BAR -->
     <header class="p-3 text-bg-dark">
         <div class="container-fluid">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -58,7 +58,14 @@ include("../PHP/Reserva/CodigoReserva2.php");
     <!-- TÍTULO DE LA PÁGINA -->
     <div class="container-fluid mt-5">
         <h1 class="display-5">Paso 2.</h1>
-        <h1 class="pb-3">Elige una hora</h1>
+        <h1>Elige una hora para
+            <?php if ($_SESSION['servicio'] == "Pelo") { ?>
+                hacer un corte de pelo
+            <?php } else if ($_SESSION['servicio'] = "Barba") { ?>
+                retocar la barba
+            <?php } ?>
+        </h1>
+        <img src="../IMG/separadorDeTexto.png" class="img-fluid" height="75" width="250" />
     </div>
 
     <!-- SÍMBOLOS DE BOOTSTRAP -->
@@ -92,9 +99,6 @@ include("../PHP/Reserva/CodigoReserva2.php");
             <div class="row" style="background-color: #e8d1b5;">
                 <div class="fw-bold col-sm col-12 border border-secondary pb-3 ps-0 pe-0" id="columnaLunes">
                     <p class="p-3 mb-3 border-bottom border-secondary" id="textoColumnaLunes" style="background-color: #ffc107;">Lunes</p>
-                    <div class="alert alert-dark ms-3 me-3" role="alert">
-                        Día no laborable
-                    </div>
                 </div>
                 <div class="fw-bold col-sm col-12 border border-secondary pb-3 ps-0 pe-0" id="columnaMartes">
                     <p class="p-3 mb-3 border-bottom border-secondary" id="textoColumnaMartes" style="background-color: #ffc107;">Martes</p>
@@ -113,37 +117,33 @@ include("../PHP/Reserva/CodigoReserva2.php");
                 </div>
                 <div class="fw-bold col-sm col-12 border border-secondary pb-3 ps-0 pe-0" id="columnaDomingo">
                     <p class="p-3 mb-3 border-bottom border-secondary" id="textoColumnaDomingo" style="background-color: #ffc107;">Domingo</p>
-                    <div class="alert alert-dark ms-3 me-3" role="alert">
-                        Día no laborable
-                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- MODAL DE CONFIRMACIÓN --> 
+        <!-- MODAL DE CONFIRMACIÓN -->
         <div class="mb-3 text-center">
-                    <!-- Modal -->
-                    <div class="modal fade" id="modalFlotante" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
-                        style="display: none;" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalCenterTitle">Confirmación de reserva</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body text-start">
-                                    <p id="textoModal"></p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Rechazar</button>
-                                    <input type="submit" class="btn btn-success" name="btnBorrar" value="Confirmar">
-                                </div>
-                            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="modalFlotante" tabindex="-1" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalCenterTitle">Confirmación de reserva</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-start">
+                            <p id="textoModal"></p>
+                            <input type="hidden" name="dataStoredDate" id="dataStoredDate"></input>
+                            <input type="hidden" name="dataStoredStr" id="dataStoredStr"></input>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Rechazar</button>
+                            <input type="submit" class="btn btn-success" name="btnEnviar" id="btnEnviar" value="Confirmar">
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
         <!-- BOTÓN VOLVER -->
         <input type="submit" class="btn btn-lg btn-warning w-25 position-fixed top-100 start-50 translate-middle box2" style="margin-top: -45px;" name="volverReserva2" value="Volver" />
@@ -157,11 +157,14 @@ include("../PHP/Reserva/CodigoReserva2.php");
     </button>
 
     <!-- BOTÓN TEMPORAL QUE LLEVA A LA RESERVA 3 -->
-    <button class="btn btn-dark" onclick="irReserva3()" id="volverArriba" title="Ir a Reserva3.php" style="position: fixed; bottom: 20px; left: 30px; z-index: 99;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-90deg-right" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M14.854 4.854a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 4H3.5A2.5 2.5 0 0 0 1 6.5v8a.5.5 0 0 0 1 0v-8A1.5 1.5 0 0 1 3.5 5h9.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4z" />
-        </svg>
-    </button>
+    <form method="POST">
+        <button class="btn btn-dark" name="irReserva3" id="irReserva3" title="Ir a Reserva3.php" style="position: fixed; bottom: 20px; left: 30px; z-index: 99;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-90deg-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M14.854 4.854a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 4H3.5A2.5 2.5 0 0 0 1 6.5v8a.5.5 0 0 0 1 0v-8A1.5 1.5 0 0 1 3.5 5h9.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4z" />
+            </svg>
+        </button>
+    </form>
+
 </body>
 
 </html>

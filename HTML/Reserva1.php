@@ -28,7 +28,7 @@ include("../PHP/Reserva/CodigoReserva1.php");
 
 <body class="text-center" data-hasqtip="0">
 
-    <!-- NAV BAR 2 -->
+    <!-- NAV BAR -->
     <header class="p-3 text-bg-dark">
         <div class="container-fluid">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -63,7 +63,8 @@ include("../PHP/Reserva/CodigoReserva1.php");
     <!-- TÍTULO DE LA PÁGINA -->
     <div class="container-fluid mt-5">
         <h1 class="display-5">Paso 1.</h1>
-        <h1 class="pb-3">Elige un servicio</h1>
+        <h1>Elige un servicio</h1>
+        <img src="../IMG/separadorDeTexto.png" class="img-fluid" height="75" width="250"/>
     </div>
 
     <!-- SERVICIOS -->

@@ -3,6 +3,7 @@ var fechaComoCadena = 0;
 var fechaComoCadenaModificada = 0;
 var fechaComoCadenaInicioSemana = 0;
 var clicks = 0;
+var esDomingo = false;
 
 window.onload = cargarFechaInicio();
 function cargarFechaInicio() {
@@ -19,13 +20,13 @@ function CargarRegistros(accion, servicio) {
 
     // Avanza o retrocede (o deja igual) la semana en la que se encuentra el usuario.
     if (accion == "delante") {
-        fechaComoCadena.setDate(fechaComoCadena.getDate() +7);
+        fechaComoCadena.setDate(fechaComoCadena.getDate() + 7);
     } else if (accion == "atras") {
-        fechaComoCadena.setDate(fechaComoCadena.getDate() -7);
+        fechaComoCadena.setDate(fechaComoCadena.getDate() - 7);
     }
-    
+
     // Le da el valor inicial de la semana correspondiente a la fechaComoCadenaInicioSemana
-    fechaComoCadenaInicioSemana.setDate(fechaComoCadena.getDate() - (numeroDia-1));
+    fechaComoCadenaInicioSemana.setDate(fechaComoCadena.getDate() - (numeroDia - 1));
 
     // Selecciona el mes en el que se encuentra
     var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
@@ -38,6 +39,7 @@ function CargarRegistros(accion, servicio) {
     // Si es domingo, se pasa a la semana siguiente (dia actual (domingo) = 1 (lunes))
     if (numeroDia == 0) {
         fechaComoCadena.setDate(fechaComoCadena.getDate() + 1);
+        esDomingo = true;
         numeroDia = 1;
     }
 
@@ -45,16 +47,23 @@ function CargarRegistros(accion, servicio) {
     if (numeroDia == 1) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 6);
+        fechaComoCadenaInicioSemana.setMonth(fechaComoCadena.getMonth());
         if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMes = meses[new Date(fechaComoCadena).getMonth() -1];
+            nombreMes = meses[new Date(fechaComoCadena).getMonth() - 1];
+        }
+        if (esDomingo) {
+            if (fechaComoCadenaInicioSemana.getDate() > fechaComoCadenaModificada.getDate()) {
+                nombreMes = meses[new Date(fechaComoCadena).getMonth()];
+                nombreMesModificado = meses[new Date(fechaComoCadena).getMonth() + 1];
+            }
         }
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
-        
+
     } else if (numeroDia == 2) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 5);
         if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMes = meses[new Date(fechaComoCadena).getMonth() -1];
+            nombreMes = meses[new Date(fechaComoCadena).getMonth() - 1];
         }
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
@@ -62,23 +71,23 @@ function CargarRegistros(accion, servicio) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 4);
         if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMes = meses[new Date(fechaComoCadena).getMonth() -1];
-        } 
+            nombreMes = meses[new Date(fechaComoCadena).getMonth() - 1];
+        }
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
     } else if (numeroDia == 4) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 3);
         if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMes = meses[new Date(fechaComoCadena).getMonth() -1];
+            nombreMes = meses[new Date(fechaComoCadena).getMonth() - 1];
         }
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
-        
+
     } else if (numeroDia == 5) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 2);
         if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMes = meses[new Date(fechaComoCadena).getMonth() -1];
+            nombreMes = meses[new Date(fechaComoCadena).getMonth() - 1];
         }
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
@@ -86,20 +95,26 @@ function CargarRegistros(accion, servicio) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 1);
         if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMes = meses[new Date(fechaComoCadena).getMonth() -1];
+            nombreMes = meses[new Date(fechaComoCadena).getMonth() - 1];
         }
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
     }
 
-    fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() - (numeroDia-1));
-    
     // Generación de los textos en la parte superior de cada columna
     var nombresSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
     var nombresSemanaSinTilde = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
-    for (i = 0; i < 7; i++) {
-        document.getElementById("textoColumna" + nombresSemanaSinTilde[i]).innerHTML = nombresSemana[i] + " " + fechaComoCadenaModificada.getDate();
-        fechaComoCadenaModificada.setDate(fechaComoCadenaModificada.getDate() + 1);
+    for (i = 0; i <= 6; i++) {
+        document.getElementById("textoColumna" + nombresSemanaSinTilde[i]).innerHTML = nombresSemana[i] + " " + fechaComoCadenaInicioSemana.getDate();
+
+        // Genera los registros de reserva según el servicio
+        if (servicio == "Pelo") {
+            GenerarRegistrosPelo(nombresSemanaSinTilde[i], fechaComoCadenaInicioSemana);
+        } else if (servicio == "Barba") {
+            GenerarRegistrosBarba(nombresSemanaSinTilde[i], fechaComoCadenaInicioSemana);
+        }
+
+        fechaComoCadenaInicioSemana.setDate(fechaComoCadenaInicioSemana.getDate() + 1);
     }
 
     // Imprime la semana en la parte superior del calendario
@@ -118,127 +133,161 @@ function CargarRegistros(accion, servicio) {
         $("#semanaAnterior").prop("disabled", false);
     }
 
-    if (clicks == 40) {
+    if (clicks == 6) {
         $("#semanaSiguiente").prop("disabled", true);
     } else {
         $("#semanaSiguiente").prop("disabled", false);
     }
 
-    // Genera los registros de reserva según el servicio
+    /* Genera los registros de reserva según el servicio
     if (servicio == "Pelo") {
         GenerarRegistrosPelo();
     } else if (servicio == "Barba") {
         GenerarRegistrosBarba();
-    }
+    } */
 
 }
 
-
 // ***********************************************************
-// ************************** PELO **************************
+// ************************** PELO ***************************
 // ***********************************************************
 
-function GenerarRegistrosPelo() {
+function GenerarRegistrosPelo(nombresSemanaSinTilde, fechaComoCadenaInicioSemana) {
+    var columna = document.getElementById("columna" + nombresSemanaSinTilde);
 
-    for (var i = 0; i < 6; i++) {
-        if (i == 0) {
-            //Lunes
-        } else {
-            var columna;
+    // En caso de dia no laborable (Lunes & Domingo) se crean los siguientes "alerts"
+    if ((nombresSemanaSinTilde == "Lunes") || (nombresSemanaSinTilde == "Domingo")) {
+        if ($("#diaNoLaborable" + nombresSemanaSinTilde)) {
+            $("#diaNoLaborable" + nombresSemanaSinTilde).remove();
+        }
+        var diaNoLaborable = document.createElement("div");
+        diaNoLaborable.className = "alert alert-dark ms-3 me-3"
+        diaNoLaborable.setAttribute("role", "alert");
+        diaNoLaborable.id = "diaNoLaborable" + nombresSemanaSinTilde;
+        diaNoLaborable.innerHTML = "Día no laborable";
+        columna.appendChild(diaNoLaborable);
 
-            if (i == 1) {
-                var dia = "Martes";
-                columna = document.getElementById("columna" + dia);
-            } else if (i == 2) {
-                var dia = "Miercoles";
-                columna = document.getElementById("columna" + dia);
-            } else if (i == 3) {
-                var dia = "Jueves";
-                columna = document.getElementById("columna" + dia);
-            } else if (i == 4) {
-                var dia = "Viernes";
-                columna = document.getElementById("columna" + dia);
-            } else if (i == 5) {
-                var dia = "Sabado";
-                columna = document.getElementById("columna" + dia);
+        // Los demás días se generan los inputs con las horas
+    } else {
+
+        if ($("#botonesManana" + nombresSemanaSinTilde)) {
+            $("#botonesManana" + nombresSemanaSinTilde).remove();
+        }
+        if ($("#separadorTarde" + nombresSemanaSinTilde)) {
+            $("#separadorTarde" + nombresSemanaSinTilde).remove();
+        }
+        if ($("#botonesTarde" + nombresSemanaSinTilde)) {
+            $("#botonesTarde" + nombresSemanaSinTilde).remove();
+        }
+
+        // ---------------------- MAÑANAS ----------------------
+
+        var botones = document.createElement("div");
+        botones.className = "btn-group-vertical w-100 ps-3 pe-3";
+        botones.role = "group";
+        botones.id = "botonesManana" + nombresSemanaSinTilde;
+        botones.ariaLabel = "Vertical button group";
+        columna.appendChild(botones);
+
+        var horasManana = ["9:30 - 10:15", "10:15 - 11:00", "11:00 - 11:45", "11:45 - 12:30", "12:30 - 13:15"];
+        for (let i = 0; i < horasManana.length; i++) {
+            let horaManana = document.createElement("input");
+            horaManana.type = "button";
+            horaManana.value = horasManana[i];
+            horaManana.className = "w-100 br-5 btn btn-light border border-dark";
+            horaManana.style = "--bs-border-opacity: .5;";
+
+            // Preparacion de datos
+            var mesActual = fechaComoCadenaInicioSemana.getMonth() + 1;
+            if (mesActual < 10) {
+                mesActual = "0" + mesActual;
+            }
+            var diaActual = fechaComoCadenaInicioSemana.getDate();
+            if (diaActual < 10) {
+                diaActual = "0" + diaActual;
+            }
+            var horaSeparada = horasManana[i].split(" ");
+            var horaSeleccionada = horaSeparada[0].split(":");
+            var horaActual = horaSeleccionada[0];
+            if (horaActual < 10) {
+                horaActual = "0" + horaActual;
+            }
+            horaActual = horaActual + horaSeleccionada[1];
+
+            horaManana.id = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaActual;
+            horaManana.setAttribute("onclick", "AbrirModal(this, '" + nombresSemanaSinTilde + "')");
+            horaManana.setAttribute("data-bs-toggle", "modal");
+            horaManana.setAttribute("data-bs-target", "#modalFlotante");
+            botones.appendChild(horaManana);
+        }
+        if (nombresSemanaSinTilde == "Sabado") {
+            let horaManana = document.createElement("input");
+            horaManana.type = "button";
+            horaManana.value = "13:15 - 14:00";
+            horaManana.className = "w-100 br-5 btn btn-light border border-dark";
+            horaManana.style = "--bs-border-opacity: .5;";
+
+            // Preparacion de datos
+            var mesActual = fechaComoCadenaInicioSemana.getMonth() + 1;
+            if (mesActual < 10) {
+                var mesActual = "0" + mesActual;
+            }
+            var diaActual = fechaComoCadenaInicioSemana.getDate();
+            if (diaActual < 10) {
+                diaActual = "0" + diaActual;
             }
 
-            // ---------------------- MAÑANAS ----------------------
+            horaManana.id = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + "13:15";
+            horaManana.setAttribute("onclick", "AbrirModal(this, '" + nombresSemanaSinTilde + "')");
+            horaManana.setAttribute("data-bs-toggle", "modal");
+            horaManana.setAttribute("data-bs-target", "#modalFlotante");
 
-            if ($("#botonesManana" + i)) {
-                $("#botonesManana" + i).remove();
-            }
-            if ($("#separadorTarde" + i)) {
-                $("#separadorTarde" + i).remove();
-            }
-            if ($("#botonesTarde" + i)) {
-                $("#botonesTarde" + i).remove();
-            }
+            botones.appendChild(horaManana);
+        }
 
+        // ---------------------- TARDES ----------------------
 
-            var botones = document.createElement("div");
-            botones.className = "btn-group-vertical w-100 ps-3 pe-3";
-            botones.role = "group";
-            botones.id = "botonesManana" + i;
-            botones.ariaLabel = "Vertical button group";
-            columna.appendChild(botones);
+        if (nombresSemanaSinTilde != "Sabado") {
 
-            var horasManana = ["9:30 - 10:15", "10:15 - 11:00", "11:00 - 11:45", "11:45 - 12:30", "12:30 - 13:15"];
-            for (let j = 0; j < horasManana.length; j++) {
-                let horaManana = document.createElement("input");
-                horaManana.type = "button";
-                horaManana.value = horasManana[j];
-                horaManana.className = "w-100 br-5 btn btn-light border border-dark";
-                horaManana.style = "--bs-border-opacity: .5;";
-                horaManana.id = dia + j;
-                horaManana.setAttribute("onclick", "AbrirModal(this, 'textoColumna"+dia+"')");
-                horaManana.setAttribute("data-bs-toggle", "modal");
-                horaManana.setAttribute("data-bs-target", "#modalFlotante");
-                botones.appendChild(horaManana);
-            }
-            if (dia == "Sabado") {
-                let horaManana = document.createElement("input");
-                horaManana.type = "button";
-                horaManana.value = "13:15 - 14:00";
-                horaManana.className = "w-100 br-5 btn btn-light border border-dark";
-                horaManana.style = "--bs-border-opacity: .5;";
-                horaManana.setAttribute("onclick", "AbrirModal(this, 'textoColumna"+dia+"')");
-                horaManana.setAttribute("data-bs-toggle", "modal");
-                horaManana.setAttribute("data-bs-target", "#modalFlotante");
-                horaManana.id = dia + parseInt(horasManana.length + 1);
-                botones.appendChild(horaManana);
-            }
+            let separadorTarde = document.createElement("p");
+            separadorTarde.innerHTML = "Tarde";
+            separadorTarde.id = "separadorTarde" + nombresSemanaSinTilde;
+            separadorTarde.className = "m-0 mt-3 mb-3 w-100";
+            columna.appendChild(separadorTarde);
 
-            // ---------------------- TARDES ----------------------
+            var botones2 = document.createElement("div");
+            botones2.className = "btn-group-vertical w-100 ps-3 pe-3";
+            botones2.role = "group";
+            botones2.id = "botonesTarde" + nombresSemanaSinTilde;
+            botones2.ariaLabel = "Vertical button group";
+            columna.appendChild(botones2);
 
-            if (dia != "Sabado") {
+            var horasTarde = ["16:00 - 16:45", "16:45 - 17:30", "17:30 - 18:15", "18:15 - 19:00", "19:00 - 19:45"];
+            for (let i = 0; i < horasTarde.length; i++) {
+                let horaTarde = document.createElement("input");
+                horaTarde.type = "button";
+                horaTarde.value = horasTarde[i];
+                horaTarde.className = "w-100 br-5 btn btn-light border border-dark";
+                horaTarde.style = "--bs-border-opacity: .5;";
 
-                let separadorTarde = document.createElement("p");
-                separadorTarde.innerHTML = "Tarde";
-                separadorTarde.id = "separadorTarde" + i;
-                separadorTarde.className = "m-0 mt-3 mb-3 w-100";
-                columna.appendChild(separadorTarde);
-
-                var botones2 = document.createElement("div");
-                botones2.className = "btn-group-vertical w-100 ps-3 pe-3";
-                botones2.role = "group";
-                botones2.id = "botonesTarde" + i;
-                botones2.ariaLabel = "Vertical button group";
-                columna.appendChild(botones2);
-
-                var horasTarde = ["16:00 - 16:45", "16:45 - 17:30", "17:30 - 18:15", "18:15 - 19:00", "19:00 - 19:45"];
-                for (let j = 0; j < horasTarde.length; j++) {
-                    let horaTarde = document.createElement("input");
-                    horaTarde.type = "button";
-                    horaTarde.value = horasTarde[j];
-                    horaTarde.className = "w-100 br-5 btn btn-light border border-dark";
-                    horaTarde.style = "--bs-border-opacity: .5;";
-                    horaTarde.setAttribute("onclick", "AbrirModal(this, 'textoColumna"+dia+"')");
-                    horaTarde.setAttribute("data-bs-toggle", "modal");
-                    horaTarde.setAttribute("data-bs-target", "#modalFlotante");
-                    horaTarde.id = dia + parseInt(j + horasManana.length);
-                    botones2.appendChild(horaTarde);
+                // Preparacion de datos
+                var mesActual = fechaComoCadenaInicioSemana.getMonth() + 1;
+                if (mesActual < 10) {
+                    var mesActual = "0" + mesActual;
                 }
+                var diaActual = fechaComoCadenaInicioSemana.getDate();
+                if (diaActual < 10) {
+                    diaActual = "0" + diaActual;
+                }
+                var horaSeparada = horasTarde[i].split(" ");
+                var horaSeleccionada = horaSeparada[0].split(":");
+                var horaFinal = horaSeleccionada[0] + horaSeleccionada[1];
+
+                horaTarde.id = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaFinal;
+                horaTarde.setAttribute("onclick", "AbrirModal(this, '" + nombresSemanaSinTilde + "')");
+                horaTarde.setAttribute("data-bs-toggle", "modal");
+                horaTarde.setAttribute("data-bs-target", "#modalFlotante");
+                botones2.appendChild(horaTarde);
             }
         }
     }
@@ -248,121 +297,143 @@ function GenerarRegistrosPelo() {
 // ************************** BARBA **************************
 // ***********************************************************
 
-function GenerarRegistrosBarba() {
+function GenerarRegistrosBarba(nombresSemanaSinTilde, fechaComoCadenaInicioSemana) {
+    var columna = document.getElementById("columna" + nombresSemanaSinTilde);
 
-    for (var i = 0; i < 6; i++) {
-        if (i == 0) {
-            //var dia = "Lunes";
-        } else {
-            var columna;
+    // En caso de dia no laborable (Lunes & Domingo) se crean los siguientes "alerts"
+    if ((nombresSemanaSinTilde == "Lunes") || (nombresSemanaSinTilde == "Domingo")) {
+        if ($("#diaNoLaborable" + nombresSemanaSinTilde)) {
+            $("#diaNoLaborable" + nombresSemanaSinTilde).remove();
+        }
+        var diaNoLaborable = document.createElement("div");
+        diaNoLaborable.className = "alert alert-dark ms-3 me-3"
+        diaNoLaborable.setAttribute("role", "alert");
+        diaNoLaborable.id = "diaNoLaborable" + nombresSemanaSinTilde;
+        diaNoLaborable.innerHTML = "Día no laborable";
+        columna.appendChild(diaNoLaborable);
 
-            if (i == 1) {
-                var dia = "Martes";
-                columna = document.getElementById("columna" + dia);
-            } else if (i == 2) {
-                var dia = "Miercoles";
-                columna = document.getElementById("columna" + dia);
-            } else if (i == 3) {
-                var dia = "Jueves";
-                columna = document.getElementById("columna" + dia);
-            } else if (i == 4) {
-                var dia = "Viernes";
-                columna = document.getElementById("columna" + dia);
-            } else if (i == 5) {
-                var dia = "Sabado";
-                columna = document.getElementById("columna" + dia);
+        // Los demás días se generan los inputs con las horas
+    } else {
+
+        if ($("#botonesManana" + nombresSemanaSinTilde)) {
+            $("#botonesManana" + nombresSemanaSinTilde).remove();
+        }
+        if ($("#separadorTarde" + nombresSemanaSinTilde)) {
+            $("#separadorTarde" + nombresSemanaSinTilde).remove();
+        }
+        if ($("#botonesTarde" + nombresSemanaSinTilde)) {
+            $("#botonesTarde" + nombresSemanaSinTilde).remove();
+        }
+
+        // ---------------------- MAÑANAS ----------------------
+
+        var botones = document.createElement("div");
+        botones.className = "btn-group-vertical w-100 ps-3 pe-3";
+        botones.role = "group";
+        botones.id = "botonesManana" + nombresSemanaSinTilde;
+        botones.ariaLabel = "Vertical button group";
+        columna.appendChild(botones);
+
+        var horasManana = ["9:30 - 10:00", "10:00 - 10:30", "10:30 - 11:00", "11:00 - 11:30", "11:30 - 12:00", "12:00 - 12:30", "12:30 - 13:00", "13:00 - 13:30"];
+        for (let i = 0; i < horasManana.length; i++) {
+            let horaManana = document.createElement("input");
+            horaManana.type = "button";
+            horaManana.value = horasManana[i];
+            horaManana.className = "w-100 br-5 btn btn-light border border-dark";
+            horaManana.style = "--bs-border-opacity: .5;";
+
+            // Preparacion de datos
+            var mesActual = fechaComoCadenaInicioSemana.getMonth() + 1;
+            if (mesActual < 10) {
+                mesActual = "0" + mesActual;
+            }
+            var diaActual = fechaComoCadenaInicioSemana.getDate();
+            if (diaActual < 10) {
+                diaActual = "0" + diaActual;
+            }
+            var horaSeparada = horasManana[i].split(" ");
+            var horaSeleccionada = horaSeparada[0].split(":");
+            var horaActual = horaSeleccionada[0];
+            if (horaActual < 10) {
+                horaActual = "0" + horaActual;
+            }
+            horaActual = horaActual + horaSeleccionada[1];
+
+            horaManana.id = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaActual;
+            horaManana.setAttribute("onclick", "AbrirModal(this, '" + nombresSemanaSinTilde + "')");
+            horaManana.setAttribute("data-bs-toggle", "modal");
+            horaManana.setAttribute("data-bs-target", "#modalFlotante");
+            botones.appendChild(horaManana);
+        }
+        if (nombresSemanaSinTilde == "Sabado") {
+            let horaManana = document.createElement("input");
+            horaManana.type = "button";
+            horaManana.value = "13:15 - 14:00";
+            horaManana.className = "w-100 br-5 btn btn-light border border-dark";
+            horaManana.style = "--bs-border-opacity: .5;";
+
+            // Preparacion de datos
+            var mesActual = fechaComoCadenaInicioSemana.getMonth() + 1;
+            if (mesActual < 10) {
+                var mesActual = "0" + mesActual;
+            }
+            var diaActual = fechaComoCadenaInicioSemana.getDate();
+            if (diaActual < 10) {
+                diaActual = "0" + diaActual;
             }
 
-            if ($("#botonesManana" + i)) {
-                $("#botonesManana" + i).remove();
-            }
-            if ($("#separadorTarde" + i)) {
-                $("#separadorTarde" + i).remove();
-            }
-            if ($("#botonesTarde" + i)) {
-                $("#botonesTarde" + i).remove();
-            }
+            horaManana.id = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + "13:15";
+            horaManana.setAttribute("onclick", "AbrirModal(this, '" + nombresSemanaSinTilde + "')");
+            horaManana.setAttribute("data-bs-toggle", "modal");
+            horaManana.setAttribute("data-bs-target", "#modalFlotante");
 
-            var botones = document.createElement("div");
-            botones.className = "btn-group-vertical w-100 ps-3 pe-3";
-            botones.role = "group";
-            botones.ariaLabel = "Vertical button group";
-            botones.id = "botonesManana" + i;
-            columna.appendChild(botones);
+            botones.appendChild(horaManana);
+        }
 
-            var horasManana = ["9:30 - 10:00", "10:00 - 10:30", "10:30 - 11:00", "11:00 - 11:30", "11:30 - 12:00", "12:00 - 12:30", "12:30 - 13:00", "13:00 - 13:30"];
-            for (let j = 0; j < horasManana.length; j++) {
-                let horaManana = document.createElement("input");
-                horaManana.type = "button";
-                horaManana.value = horasManana[j];
-                horaManana.className = "w-100 br-5 btn btn-light border border-dark";
-                horaManana.style = "--bs-border-opacity: .5;";
-                horaManana.id = dia + j;
-                horaManana.setAttribute("onclick", "AbrirModal(this, 'textoColumna"+dia+"')");
-                horaManana.setAttribute("data-bs-toggle", "modal");
-                horaManana.setAttribute("data-bs-target", "#modalFlotante");
-                botones.appendChild(horaManana);
-            }
-            if (dia == "Sabado") {
-                let horaManana = document.createElement("input");
-                horaManana.type = "button";
-                horaManana.value = "13:30 - 14:00";
-                horaManana.className = "w-100 br-5 btn btn-light border border-dark";
-                horaManana.style = "--bs-border-opacity: .5;";
-                horaManana.id = dia + parseInt(horasManana.length + 1);
-                horaManana.setAttribute("onclick", "AbrirModal(this, 'textoColumna"+dia+"')");
-                horaManana.setAttribute("data-bs-toggle", "modal");
-                horaManana.setAttribute("data-bs-target", "#modalFlotante");
-                botones.appendChild(horaManana);
-            }
+        // ---------------------- TARDES ----------------------
 
-            // ---------------------- TARDES ----------------------
+        if (nombresSemanaSinTilde != "Sabado") {
 
-            if (dia != "Sabado") {
-                let separadorTarde = document.createElement("p");
-                separadorTarde.innerHTML = "Tarde";
-                separadorTarde.id = "separadorTarde" + i;
-                separadorTarde.className = "m-0 mt-3 mb-3 w-100"
-                columna.appendChild(separadorTarde);
+            let separadorTarde = document.createElement("p");
+            separadorTarde.innerHTML = "Tarde";
+            separadorTarde.id = "separadorTarde" + nombresSemanaSinTilde;
+            separadorTarde.className = "m-0 mt-3 mb-3 w-100";
+            columna.appendChild(separadorTarde);
 
-                var botones2 = document.createElement("div");
-                botones2.className = "btn-group-vertical w-100 ps-3 pe-3";
-                botones2.role = "group";
-                botones2.id = "botonesTarde" + i;
-                botones2.ariaLabel = "Vertical button group";
-                columna.appendChild(botones2);
+            var botones2 = document.createElement("div");
+            botones2.className = "btn-group-vertical w-100 ps-3 pe-3";
+            botones2.role = "group";
+            botones2.id = "botonesTarde" + nombresSemanaSinTilde;
+            botones2.ariaLabel = "Vertical button group";
+            columna.appendChild(botones2);
 
-                var horasTarde = ["16:00 - 16:30", "16:30 - 17:00", "17:00 - 17:30", "17:30 - 18:00", "18:00 - 18:30", "18:30 - 19:00", "19:00 - 19:30", "19:30 - 20:00"];
-                for (let j = 0; j < horasTarde.length; j++) {
-                    let horaTarde = document.createElement("input");
-                    horaTarde.type = "button";
-                    horaTarde.value = horasTarde[j];
-                    horaTarde.className = "w-100 br-5 btn btn-light border border-dark";
-                    horaTarde.style = "--bs-border-opacity: .5;";
-                    horaTarde.setAttribute("onclick", "AbrirModal(this, 'textoColumna"+dia+"')");
-                    horaTarde.setAttribute("data-bs-toggle", "modal");
-                    horaTarde.setAttribute("data-bs-target", "#modalFlotante");
-                    horaTarde.id = dia + parseInt(j + horasManana.length);
-                    botones2.appendChild(horaTarde);
+            var horasTarde = ["16:00 - 16:30", "16:30 - 17:00", "17:00 - 17:30", "17:30 - 18:00", "18:00 - 18:30", "18:30 - 19:00", "19:00 - 19:30", "19:30 - 20:00"];
+            for (let i = 0; i < horasTarde.length; i++) {
+                let horaTarde = document.createElement("input");
+                horaTarde.type = "button";
+                horaTarde.value = horasTarde[i];
+                horaTarde.className = "w-100 br-5 btn btn-light border border-dark";
+                horaTarde.style = "--bs-border-opacity: .5;";
+
+                // Preparacion de datos
+                var mesActual = fechaComoCadenaInicioSemana.getMonth() + 1;
+                if (mesActual < 10) {
+                    var mesActual = "0" + mesActual;
                 }
+                var diaActual = fechaComoCadenaInicioSemana.getDate();
+                if (diaActual < 10) {
+                    diaActual = "0" + diaActual;
+                }
+                var horaSeparada = horasTarde[i].split(" ");
+                var horaSeleccionada = horaSeparada[0].split(":");
+                var horaFinal = horaSeleccionada[0] + horaSeleccionada[1];
+
+                horaTarde.id = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaFinal;
+                horaTarde.setAttribute("onclick", "AbrirModal(this, '" + nombresSemanaSinTilde + "')");
+                horaTarde.setAttribute("data-bs-toggle", "modal");
+                horaTarde.setAttribute("data-bs-target", "#modalFlotante");
+                botones2.appendChild(horaTarde);
             }
         }
     }
-}
-
-// ***************************************************************************************************************************************
-// ********************************************************** HORA SELECCIONADA **********************************************************
-// ***************************************************************************************************************************************
-
-function AbrirModal(botonPresionado, textoColumna) {
-    let dia = botonPresionado.id;
-
-    let columnaSeparada = document.getElementById(textoColumna).innerHTML;
-    let columna = columnaSeparada.split(" ");
-    let stringModal = "¿Quieres reservar para el " + columna[0] + " " + columna[1] + " a las " + $(botonPresionado).val() + "?";
-    $("#textoModal").text(stringModal);
-}
-
-function HoraSeleccionada() {
-
 }

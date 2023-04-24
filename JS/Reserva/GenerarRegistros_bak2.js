@@ -204,10 +204,15 @@ function GenerarRegistrosPelo(nombresSemanaSinTilde, fechaComoCadenaInicioSemana
             horaActual = horaActual + horaSeleccionada[1];
             var IDPreparada = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaActual;
 
-            setTimeout(crearBoton(botones, IDPreparada, "Pelo", horasManana[i], nombresSemanaSinTilde), 100);
+            setInterval(crearBoton(botones, IDPreparada, "Pelo", horasManana[i], nombresSemanaSinTilde), 3000);
         }
-
+    
         if (nombresSemanaSinTilde == "Sabado") {
+            let horaManana = document.createElement("input");
+            horaManana.type = "button";
+            horaManana.value = "13:15 - 14:00";
+            horaManana.className = "w-100 br-5 btn btn-light border border-dark";
+            horaManana.style = "--bs-border-opacity: .5;";
 
             // Preparacion de datos
             var mesActual = fechaComoCadenaInicioSemana.getMonth() + 1;
@@ -218,10 +223,13 @@ function GenerarRegistrosPelo(nombresSemanaSinTilde, fechaComoCadenaInicioSemana
             if (diaActual < 10) {
                 diaActual = "0" + diaActual;
             }
-            var IDPreparada = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + "1345";
 
-            setTimeout(crearBoton(botones, IDPreparada, "Pelo", "13:15 - 14:00", nombresSemanaSinTilde), 100);
+            horaManana.id = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + "13:15";
+            horaManana.setAttribute("onclick", "AbrirModal(this, '" + nombresSemanaSinTilde + "')");
+            horaManana.setAttribute("data-bs-toggle", "modal");
+            horaManana.setAttribute("data-bs-target", "#modalFlotante");
 
+            botones.appendChild(horaManana);
         }
 
         // ---------------------- TARDES ----------------------
@@ -243,6 +251,12 @@ function GenerarRegistrosPelo(nombresSemanaSinTilde, fechaComoCadenaInicioSemana
 
             var horasTarde = ["16:00 - 16:45", "16:45 - 17:30", "17:30 - 18:15", "18:15 - 19:00", "19:00 - 19:45"];
             for (let i = 0; i < horasTarde.length; i++) {
+                let horaTarde = document.createElement("input");
+                horaTarde.type = "button";
+                horaTarde.value = horasTarde[i];
+                horaTarde.className = "w-100 br-5 btn btn-light border border-dark";
+                horaTarde.style = "--bs-border-opacity: .5;";
+
                 // Preparacion de datos
                 var mesActual = fechaComoCadenaInicioSemana.getMonth() + 1;
                 if (mesActual < 10) {
@@ -254,12 +268,41 @@ function GenerarRegistrosPelo(nombresSemanaSinTilde, fechaComoCadenaInicioSemana
                 }
                 var horaSeparada = horasTarde[i].split(" ");
                 var horaSeleccionada = horaSeparada[0].split(":");
-                var horaActual = horaSeleccionada[0] + horaSeleccionada[1];
-                var IDPreparada = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaActual;
+                var horaFinal = horaSeleccionada[0] + horaSeleccionada[1];
 
-                setTimeout(crearBoton(botones2, IDPreparada, "Pelo", horasTarde[i], nombresSemanaSinTilde), 100);
+                horaTarde.id = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaFinal;
+                horaTarde.setAttribute("onclick", "AbrirModal(this, '" + nombresSemanaSinTilde + "')");
+                horaTarde.setAttribute("data-bs-toggle", "modal");
+                horaTarde.setAttribute("data-bs-target", "#modalFlotante");
+                botones2.appendChild(horaTarde);
             }
         }
+    }
+
+    function crearBoton(botones, IDPreparada, Servicio, horasArray, nombresSemanaSinTilde) {
+        $.ajax({
+            type: 'POST',  // Envío con método POST
+            url: '../PHP/Reserva/ComprobarReservaDisponible.php',  // Fichero destino (el PHP que trata los datos)
+            data: { IDReserva: IDPreparada, Servicio: Servicio }, // Datos que se envían
+        }).done(function (msg) {  // Función que se ejecuta si todo ha ido bien
+            let horaManana = document.createElement("input");
+            horaManana.type = "button";
+            horaManana.value = horasArray;
+            horaManana.className = "w-100 br-5 btn btn-light border border-dark";
+            horaManana.style = "--bs-border-opacity: .5;";
+            horaManana.id = IDPreparada;
+            horaManana.setAttribute("onclick", "AbrirModal(this, '" + nombresSemanaSinTilde + "')");
+            horaManana.setAttribute("data-bs-toggle", "modal");
+            horaManana.setAttribute("data-bs-target", "#modalFlotante");
+            if (msg == "Ocupado") {
+                $(horaManana).addClass("disabled");
+            }
+            botones.appendChild(horaManana);
+
+        }).fail(function (jqXHR, textStatus, errorThrown) { // Función que se ejecuta si algo ha ido mal
+            // Mostramos en consola el mensaje con el error que se ha producido
+            $("#consola").html("The following error occured: " + textStatus + " " + errorThrown);
+        });
     }
 }
 
@@ -306,6 +349,11 @@ function GenerarRegistrosBarba(nombresSemanaSinTilde, fechaComoCadenaInicioSeman
 
         var horasManana = ["9:30 - 10:00", "10:00 - 10:30", "10:30 - 11:00", "11:00 - 11:30", "11:30 - 12:00", "12:00 - 12:30", "12:30 - 13:00", "13:00 - 13:30"];
         for (let i = 0; i < horasManana.length; i++) {
+            let horaManana = document.createElement("input");
+            horaManana.type = "button";
+            horaManana.value = horasManana[i];
+            horaManana.className = "w-100 br-5 btn btn-light border border-dark";
+            horaManana.style = "--bs-border-opacity: .5;";
 
             // Preparacion de datos
             var mesActual = fechaComoCadenaInicioSemana.getMonth() + 1;
@@ -323,12 +371,19 @@ function GenerarRegistrosBarba(nombresSemanaSinTilde, fechaComoCadenaInicioSeman
                 horaActual = "0" + horaActual;
             }
             horaActual = horaActual + horaSeleccionada[1];
-            var IDPreparada = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaActual;
 
-            setTimeout(crearBoton(botones, IDPreparada, "Barba", horasManana[i], nombresSemanaSinTilde), 100);
-
+            horaManana.id = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaActual;
+            horaManana.setAttribute("onclick", "AbrirModal(this, '" + nombresSemanaSinTilde + "')");
+            horaManana.setAttribute("data-bs-toggle", "modal");
+            horaManana.setAttribute("data-bs-target", "#modalFlotante");
+            botones.appendChild(horaManana);
         }
         if (nombresSemanaSinTilde == "Sabado") {
+            let horaManana = document.createElement("input");
+            horaManana.type = "button";
+            horaManana.value = "13:15 - 14:00";
+            horaManana.className = "w-100 br-5 btn btn-light border border-dark";
+            horaManana.style = "--bs-border-opacity: .5;";
 
             // Preparacion de datos
             var mesActual = fechaComoCadenaInicioSemana.getMonth() + 1;
@@ -339,10 +394,13 @@ function GenerarRegistrosBarba(nombresSemanaSinTilde, fechaComoCadenaInicioSeman
             if (diaActual < 10) {
                 diaActual = "0" + diaActual;
             }
-            var IDPreparada = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + "1330";
 
-            setTimeout(crearBoton(botones, IDPreparada, "Barba", "13:30 - 14:00", nombresSemanaSinTilde), 100);
+            horaManana.id = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + "13:15";
+            horaManana.setAttribute("onclick", "AbrirModal(this, '" + nombresSemanaSinTilde + "')");
+            horaManana.setAttribute("data-bs-toggle", "modal");
+            horaManana.setAttribute("data-bs-target", "#modalFlotante");
 
+            botones.appendChild(horaManana);
         }
 
         // ---------------------- TARDES ----------------------
@@ -364,6 +422,11 @@ function GenerarRegistrosBarba(nombresSemanaSinTilde, fechaComoCadenaInicioSeman
 
             var horasTarde = ["16:00 - 16:30", "16:30 - 17:00", "17:00 - 17:30", "17:30 - 18:00", "18:00 - 18:30", "18:30 - 19:00", "19:00 - 19:30", "19:30 - 20:00"];
             for (let i = 0; i < horasTarde.length; i++) {
+                let horaTarde = document.createElement("input");
+                horaTarde.type = "button";
+                horaTarde.value = horasTarde[i];
+                horaTarde.className = "w-100 br-5 btn btn-light border border-dark";
+                horaTarde.style = "--bs-border-opacity: .5;";
 
                 // Preparacion de datos
                 var mesActual = fechaComoCadenaInicioSemana.getMonth() + 1;
@@ -376,45 +439,14 @@ function GenerarRegistrosBarba(nombresSemanaSinTilde, fechaComoCadenaInicioSeman
                 }
                 var horaSeparada = horasTarde[i].split(" ");
                 var horaSeleccionada = horaSeparada[0].split(":");
-                var horaActual = horaSeleccionada[0] + horaSeleccionada[1];
-                var IDPreparada = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaActual;
+                var horaFinal = horaSeleccionada[0] + horaSeleccionada[1];
 
-                setTimeout(crearBoton(botones2, IDPreparada, "Barba", horasTarde[i], nombresSemanaSinTilde), 100);
-
+                horaTarde.id = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaFinal;
+                horaTarde.setAttribute("onclick", "AbrirModal(this, '" + nombresSemanaSinTilde + "')");
+                horaTarde.setAttribute("data-bs-toggle", "modal");
+                horaTarde.setAttribute("data-bs-target", "#modalFlotante");
+                botones2.appendChild(horaTarde);
             }
         }
     }
-}
-
-// ******************************************************************************************************
-// ***************************************** CREADOR DE BOTONES *****************************************
-// ******************************************************************************************************
-
-function crearBoton(botones, IDPreparada, Servicio, horasArray, nombresSemanaSinTilde) {
-    $.ajax({
-        type: 'POST',  // Envío con método POST
-        url: '../PHP/Reserva/ComprobarReservaDisponible.php',  // Fichero destino (el PHP que trata los datos)
-        data: { IDReserva: IDPreparada, Servicio: Servicio }, // Datos que se envían
-    }).done(function (msg) {  // Función que se ejecuta si todo ha ido bien
-        let hora = document.createElement("input");
-        hora.type = "button";
-        hora.value = horasArray;
-        hora.className = "w-100 br-5 btn btn-light border border-dark";
-        hora.style = "--bs-border-opacity: .5;";
-        hora.id = IDPreparada;
-        hora.setAttribute("onclick", "AbrirModal(this, '" + nombresSemanaSinTilde + "')");
-        hora.setAttribute("data-bs-toggle", "modal");
-        hora.setAttribute("data-bs-target", "#modalFlotante");
-        if (msg == "Ocupado") {
-            $(hora).addClass("disabled");
-            $(hora).css({ backgroundColor: '#ffdacf' });
-            $(hora).attr("data-bs-toggle", "tooltip");
-            $(hora).attr("data-bs-title", "Hora seleccionada");
-        }
-        botones.appendChild(hora);
-
-    }).fail(function (jqXHR, textStatus, errorThrown) { // Función que se ejecuta si algo ha ido mal
-        // Mostramos en consola el mensaje con el error que se ha producido
-        $("#consola").html("The following error occured: " + textStatus + " " + errorThrown);
-    });
 }

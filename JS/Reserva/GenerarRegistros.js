@@ -101,6 +101,28 @@ function CargarRegistros(accion, servicio) {
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
     }
+    
+    // Imprime la semana en la parte superior del calendario
+    document.getElementById("semanaCorrespondiente").innerHTML = "Semana: " + stringFecha + " del " + new Date(fechaComoCadenaModificada).getFullYear();
+
+    // Encontrar el codigo de fechaHora actual
+    var mesActual = fechaComoCadena.getMonth() + 1;
+    if (mesActual < 10) {
+        mesActual = "0" + mesActual;
+    }
+    var diaActual = fechaComoCadena.getDate();
+    if (diaActual < 10) {
+        diaActual = "0" + diaActual;
+    }
+    var horaActual = fechaComoCadena.getHours();
+    if (horaActual < 10) {
+        horaActual = "0" + horaActual;
+    }
+    var minutoActual = fechaComoCadena.getMinutes();
+    if (minutoActual < 10) {
+        minutoActual = "0" + minutoActual;
+    }
+    var IDFechaHoraActual = fechaComoCadena.getFullYear() + mesActual + diaActual + horaActual + minutoActual;
 
     // Generación de los textos en la parte superior de cada columna
     var nombresSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
@@ -110,16 +132,13 @@ function CargarRegistros(accion, servicio) {
 
         // Genera los registros de reserva según el servicio
         if (servicio == "Pelo") {
-            GenerarRegistrosPelo(nombresSemanaSinTilde[i], fechaComoCadenaInicioSemana);
+            GenerarRegistrosPelo(nombresSemanaSinTilde[i], fechaComoCadenaInicioSemana, IDFechaHoraActual);
         } else if (servicio == "Barba") {
-            GenerarRegistrosBarba(nombresSemanaSinTilde[i], fechaComoCadenaInicioSemana);
+            GenerarRegistrosBarba(nombresSemanaSinTilde[i], fechaComoCadenaInicioSemana, IDFechaHoraActual);
         }
 
         fechaComoCadenaInicioSemana.setDate(fechaComoCadenaInicioSemana.getDate() + 1);
     }
-
-    // Imprime la semana en la parte superior del calendario
-    document.getElementById("semanaCorrespondiente").innerHTML = "Semana: " + stringFecha + " del " + new Date(fechaComoCadenaModificada).getFullYear();
 
     // Gestiona los clicks que avanzan y retroceden las semanas
     if (accion == "atras") {
@@ -146,7 +165,7 @@ function CargarRegistros(accion, servicio) {
 // ************************** PELO ***************************
 // ***********************************************************
 
-function GenerarRegistrosPelo(nombresSemanaSinTilde, fechaComoCadenaInicioSemana) {
+function GenerarRegistrosPelo(nombresSemanaSinTilde, fechaComoCadenaInicioSemana, IDFechaHoraActual) {
     var columna = document.getElementById("columna" + nombresSemanaSinTilde);
 
     // En caso de dia no laborable (Lunes & Domingo) se crean los siguientes "alerts"
@@ -203,8 +222,12 @@ function GenerarRegistrosPelo(nombresSemanaSinTilde, fechaComoCadenaInicioSemana
             }
             horaActual = horaActual + horaSeleccionada[1];
             var IDPreparada = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaActual;
+            if (parseInt(IDFechaHoraActual) < IDPreparada) {
+                setTimeout(crearBoton(botones, IDPreparada, "Pelo", horasManana[i], nombresSemanaSinTilde), 100);
+            } else {
+                setTimeout(crearBotonExpirado(botones, "EXPIRADO", nombresSemanaSinTilde), 100);
+            }
 
-            setTimeout(crearBoton(botones, IDPreparada, "Pelo", horasManana[i], nombresSemanaSinTilde), 100);
         }
 
         if (nombresSemanaSinTilde == "Sabado") {
@@ -220,7 +243,11 @@ function GenerarRegistrosPelo(nombresSemanaSinTilde, fechaComoCadenaInicioSemana
             }
             var IDPreparada = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + "1345";
 
-            setTimeout(crearBoton(botones, IDPreparada, "Pelo", "13:15 - 14:00", nombresSemanaSinTilde), 100);
+            if (parseInt(IDFechaHoraActual) < IDPreparada) {
+                setTimeout(crearBoton(botones, IDPreparada, "Pelo", "13:15 - 14:00", nombresSemanaSinTilde), 100);
+            } else {
+                setTimeout(crearBotonExpirado(botones, "EXPIRADO", nombresSemanaSinTilde), 100);
+            }
 
         }
 
@@ -257,7 +284,11 @@ function GenerarRegistrosPelo(nombresSemanaSinTilde, fechaComoCadenaInicioSemana
                 var horaActual = horaSeleccionada[0] + horaSeleccionada[1];
                 var IDPreparada = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaActual;
 
-                setTimeout(crearBoton(botones2, IDPreparada, "Pelo", horasTarde[i], nombresSemanaSinTilde), 100);
+                if (parseInt(IDFechaHoraActual) < IDPreparada) {
+                    setTimeout(crearBoton(botones2, IDPreparada, "Pelo", horasTarde[i], nombresSemanaSinTilde), 100);
+                } else {
+                    setTimeout(crearBotonExpirado(botones2, "EXPIRADO", nombresSemanaSinTilde), 100);
+                }
             }
         }
     }
@@ -267,7 +298,7 @@ function GenerarRegistrosPelo(nombresSemanaSinTilde, fechaComoCadenaInicioSemana
 // ************************** BARBA **************************
 // ***********************************************************
 
-function GenerarRegistrosBarba(nombresSemanaSinTilde, fechaComoCadenaInicioSemana) {
+function GenerarRegistrosBarba(nombresSemanaSinTilde, fechaComoCadenaInicioSemana, IDFechaHoraActual) {
     var columna = document.getElementById("columna" + nombresSemanaSinTilde);
 
     // En caso de dia no laborable (Lunes & Domingo) se crean los siguientes "alerts"
@@ -325,7 +356,11 @@ function GenerarRegistrosBarba(nombresSemanaSinTilde, fechaComoCadenaInicioSeman
             horaActual = horaActual + horaSeleccionada[1];
             var IDPreparada = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaActual;
 
-            setTimeout(crearBoton(botones, IDPreparada, "Barba", horasManana[i], nombresSemanaSinTilde), 100);
+            if (parseInt(IDFechaHoraActual) < IDPreparada) {
+                setTimeout(crearBoton(botones, IDPreparada, "Barba", horasManana[i], nombresSemanaSinTilde), 100);
+            } else {
+                setTimeout(crearBotonExpirado(botones, "EXPIRADO", nombresSemanaSinTilde), 100);
+            }
 
         }
         if (nombresSemanaSinTilde == "Sabado") {
@@ -341,7 +376,11 @@ function GenerarRegistrosBarba(nombresSemanaSinTilde, fechaComoCadenaInicioSeman
             }
             var IDPreparada = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + "1330";
 
-            setTimeout(crearBoton(botones, IDPreparada, "Barba", "13:30 - 14:00", nombresSemanaSinTilde), 100);
+            if (parseInt(IDFechaHoraActual) < IDPreparada) {
+                setTimeout(crearBoton(botones, IDPreparada, "Barba", "13:30 - 14:00", nombresSemanaSinTilde), 100);
+            } else {
+                setTimeout(crearBotonExpirado(botones, "EXPIRADO", nombresSemanaSinTilde), 100);
+            }
 
         }
 
@@ -379,7 +418,11 @@ function GenerarRegistrosBarba(nombresSemanaSinTilde, fechaComoCadenaInicioSeman
                 var horaActual = horaSeleccionada[0] + horaSeleccionada[1];
                 var IDPreparada = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaActual;
 
-                setTimeout(crearBoton(botones2, IDPreparada, "Barba", horasTarde[i], nombresSemanaSinTilde), 100);
+                if (parseInt(IDFechaHoraActual) < IDPreparada) {
+                    setTimeout(crearBoton(botones2, IDPreparada, "Barba", horasTarde[i], nombresSemanaSinTilde), 100);
+                } else {
+                    setTimeout(crearBotonExpirado(botones2, "EXPIRADO", nombresSemanaSinTilde), 100);
+                }
 
             }
         }
@@ -407,7 +450,7 @@ function crearBoton(botones, IDPreparada, Servicio, horasArray, nombresSemanaSin
         hora.setAttribute("data-bs-target", "#modalFlotante");
         if (msg == "Ocupado") {
             $(hora).addClass("disabled");
-            $(hora).css({ backgroundColor: '#ffdacf' });
+            $(hora).css({ backgroundColor: '#cfcfcf' });
             $(hora).attr("data-bs-toggle", "tooltip");
             $(hora).attr("data-bs-title", "Hora seleccionada");
         }
@@ -417,4 +460,18 @@ function crearBoton(botones, IDPreparada, Servicio, horasArray, nombresSemanaSin
         // Mostramos en consola el mensaje con el error que se ha producido
         $("#consola").html("The following error occured: " + textStatus + " " + errorThrown);
     });
+}
+
+function crearBotonExpirado(botones, horasArray, nombresSemanaSinTilde) {
+    let hora = document.createElement("input");
+    hora.type = "button";
+    hora.value = horasArray;
+    hora.className = "w-100 br-5 btn btn-light border border-dark";
+    hora.style = "--bs-border-opacity: .5;";
+    hora.setAttribute("onclick", "AbrirModal(this, '" + nombresSemanaSinTilde + "')");
+    hora.setAttribute("data-bs-toggle", "modal");
+    hora.setAttribute("data-bs-target", "#modalFlotante");
+    $(hora).addClass("disabled");
+    $(hora).css({ backgroundColor: '#e6dfd1' });
+    botones.appendChild(hora);
 }

@@ -2,7 +2,7 @@
 
 //echo "<script>console.log(" . $_SESSION['fechaReserva'] . ")</script>";
 $_SESSION['pagoRealizado'] = "";
-echo "<input type='hidden' value='" . $_SESSION['fechaReserva'] . "'></input>";
+//echo "<input type='hidden' value='" . $_SESSION['fechaReserva'] . "'></input>";
 
 if (empty($_SESSION['fechaReserva'])) {
     header('Location: Reserva2.php');

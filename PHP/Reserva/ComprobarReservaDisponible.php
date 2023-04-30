@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-$POSTSeparado = explode("-", $_POST['IDReserva']);
 $IDReserva = $_POST['IDReserva'];
 $Servicio = $_POST['Servicio'];
 

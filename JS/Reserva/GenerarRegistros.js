@@ -462,15 +462,12 @@ function crearBoton(botones, IDPreparada, Servicio, horasArray, nombresSemanaSin
     });
 }
 
-function crearBotonExpirado(botones, horasArray, nombresSemanaSinTilde) {
+function crearBotonExpirado(botones, horasArray) {
     let hora = document.createElement("input");
     hora.type = "button";
     hora.value = horasArray;
     hora.className = "w-100 br-5 btn btn-light border border-dark";
     hora.style = "--bs-border-opacity: .5;";
-    hora.setAttribute("onclick", "AbrirModal(this, '" + nombresSemanaSinTilde + "')");
-    hora.setAttribute("data-bs-toggle", "modal");
-    hora.setAttribute("data-bs-target", "#modalFlotante");
     $(hora).addClass("disabled");
     $(hora).css({ backgroundColor: '#e6dfd1' });
     botones.appendChild(hora);

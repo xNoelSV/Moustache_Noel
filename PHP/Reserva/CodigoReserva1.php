@@ -1,5 +1,4 @@
 <?php
-$servicio = "";
 if (isset($_POST['ReservaPelo']) || isset($_POST['ReservaBarba'])) {
     if (isset($_POST['ReservaPelo'])) {
         $_SESSION['servicio'] = "Pelo";

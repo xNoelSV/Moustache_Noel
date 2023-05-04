@@ -41,6 +41,9 @@ if (isset($_POST['btnLogin'])) {
                 $row = $stmt->fetch();
                 $_SESSION['Nombre'] = $row['name'];
                 $_SESSION['ID'] = $row['ID'];
+                if ($_SESSION['ID'] == 0) {
+                    $_SESSION['esAdmin'] = "Si";
+                }
                 $_SESSION['Email'] = $row['email'];
                 header('Location: paginaPrincipal.php');
                 

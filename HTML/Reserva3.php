@@ -48,6 +48,8 @@ include("../PHP/Reserva/CodigoReserva3.php");
                     <li><a href="paginaPrincipal.php" onclick="volverReserva()" class="nav-link px-3 text-white subrayadoNav">Home</a></li>
                     <li><a href="Servicios.php" onclick="volverReserva()" class="nav-link px-3 text-white subrayadoNav">Servicios</a></li>
                     <li><a href="Reserva1.php" onclick="volverReserva()" class="nav-link px-3 text-white subrayadoNav">Reserva</a></li>
+                    <?php if(isset($_SESSION['esAdmin'])) {?><li><a href="PanelAdministrador.php" onclick="volverReserva()" class="nav-link px-3 text-white subrayadoNav">Panel de administrador</a></li><?php }?>
+                    <?php if (isset($_SESSION['esAdmin'])) { ?><li><a href="ListadoReservas.php" class="nav-link px-3 text-white subrayadoNav">Listado de reservas</a></li><?php } ?>
                 </ul>
                 <div class="dropdown">
                     <button class="btn btn-warning dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -175,7 +177,7 @@ include("../PHP/Reserva/CodigoReserva3.php");
                                         "description": "Corte de pelo",
                                         "amount": {
                                             "currency_code": "EUR",
-                                            "value": 21.5
+                                            "value": 21.50
                                         }
                                     }]
                                 });

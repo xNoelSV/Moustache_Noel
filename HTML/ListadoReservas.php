@@ -5,20 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página principal</title>
+    <title>Listado de reservas</title>
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="css/estilo.css" rel="stylesheet" type="text/css" />
 
     <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../JS/paginaPrincipal/JSPaginaPrincipal.js"></script>
+    <script type="text/javascript" src="../JS/ListadoReservas/JSListadoReservas.js"></script>
     <script type="text/javascript" src="../JS/cerrarSession.js"></script>
     <script language="JavaScript" type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 
 <?php
-include("../PHP/paginaPrincipal/CodigoPaginaPrincipal.php");
+include("../PHP/ListadoReservas/CodigoListadoReservas.php");
 ?>
 
 <body class="text-center" data-hasqtip="0">
@@ -61,6 +61,8 @@ include("../PHP/paginaPrincipal/CodigoPaginaPrincipal.php");
             </div>
         </div>
     </header>
+
+    
 
 </body>
 

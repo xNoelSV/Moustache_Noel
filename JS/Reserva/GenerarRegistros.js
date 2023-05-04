@@ -9,7 +9,10 @@ var esDomingo = false;
 window.onload = cargarFechaInicio();
 function cargarFechaInicio() {
     fechaHoy = Date.now();
+    fechaHoyMod = new Date(fechaHoy);
+    //fechaHoyMod.setDate(fechaHoyMod.getDate() + 7);
     fechaComoCadena = new Date(fechaHoy);
+    //fechaComoCadena.setDate(fechaComoCadena.getDate() + 7);
     fechaComoCadenaModificada = new Date(fechaHoy);
     fechaComoCadenaInicioSemana = new Date(fechaHoy);
 }
@@ -26,37 +29,36 @@ function CargarRegistros(accion, servicio) {
         fechaComoCadena.setDate(fechaComoCadena.getDate() - 7);
     }
 
-    // Le da el valor inicial de la semana correspondiente a la fechaComoCadenaInicioSemana
-    fechaComoCadenaInicioSemana.setDate(fechaComoCadena.getDate() - (numeroDia - 1));
-
+    // Si es domingo, se pasa a la semana siguiente (dia actual (domingo) = 1 (lunes))
+    // Si es sábado por la tarde, se hace lo mismo
+    let horaMinActual = fechaComoCadena.getHours()+""+fechaComoCadena.getMinutes(); 
+    if ((numeroDia == 0) || ((numeroDia==6) && (horaMinActual > 1345))) {
+        if (numeroDia == 0) {
+            fechaComoCadena.setDate(fechaComoCadena.getDate() + 1);
+        } else if ((numeroDia==6) && (horaMinActual > 1345)) {
+            fechaComoCadena.setDate(fechaComoCadena.getDate() + 2);
+        }
+        numeroDia = 1;
+    }
+    
     // Selecciona el mes en el que se encuentra
     var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     var nombreMes = meses[new Date(fechaComoCadena).getMonth()];
     var nombreMesModificado = meses[new Date(fechaComoCadena).getMonth()];
+    
+    // Le da el valor inicial de la semana correspondiente a la fechaComoCadenaInicioSemana
+    fechaComoCadenaInicioSemana.setDate(fechaComoCadena.getDate() - (numeroDia - 1));
+    fechaComoCadenaInicioSemana.setMonth(fechaComoCadena.getMonth());
 
     // Se le da el valor del primer dia de la semana a la cadena
     var stringFecha = parseInt(fechaComoCadenaInicioSemana.getDate());
-
-    // Si es domingo, se pasa a la semana siguiente (dia actual (domingo) = 1 (lunes))
-    if (numeroDia == 0) {
-        fechaComoCadena.setDate(fechaComoCadena.getDate() + 1);
-        esDomingo = true;
-        numeroDia = 1;
-    }
-
+    
     // Administrador que determina los valores de cada dia según la semana en el que nos encontramos
     if (numeroDia == 1) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 6);
-        fechaComoCadenaInicioSemana.setMonth(fechaComoCadena.getMonth());
         if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
             nombreMesModificado = meses[new Date(fechaComoCadenaInicioSemana).getMonth() + 1];
-        }
-        if (esDomingo) {
-            if (fechaComoCadenaInicioSemana.getDate() > fechaComoCadenaModificada.getDate()) {
-                nombreMes = meses[new Date(fechaComoCadena).getMonth()];
-                nombreMesModificado = meses[new Date(fechaComoCadena).getMonth() + 1];
-            }
         }
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
@@ -106,23 +108,23 @@ function CargarRegistros(accion, servicio) {
     document.getElementById("semanaCorrespondiente").innerHTML = "Semana: " + stringFecha + " del " + new Date(fechaComoCadenaModificada).getFullYear();
 
     // Encontrar el codigo de fechaHora actual
-    var mesActual = fechaComoCadena.getMonth() + 1;
+    var mesActual = fechaHoyMod.getMonth() + 1;
     if (mesActual < 10) {
         mesActual = "0" + mesActual;
     }
-    var diaActual = fechaComoCadena.getDate();
+    var diaActual = fechaHoyMod.getDate();
     if (diaActual < 10) {
         diaActual = "0" + diaActual;
     }
-    var horaActual = fechaComoCadena.getHours();
+    var horaActual = fechaHoyMod.getHours();
     if (horaActual < 10) {
         horaActual = "0" + horaActual;
     }
-    var minutoActual = fechaComoCadena.getMinutes();
+    var minutoActual = fechaHoyMod.getMinutes();
     if (minutoActual < 10) {
         minutoActual = "0" + minutoActual;
     }
-    var IDFechaHoraActual = fechaComoCadena.getFullYear() + mesActual + diaActual + horaActual + minutoActual;
+    var IDFechaHoraActual = fechaHoyMod.getFullYear() + mesActual + diaActual + horaActual + minutoActual;
 
     // Generación de los textos en la parte superior de cada columna
     var nombresSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
@@ -153,7 +155,7 @@ function CargarRegistros(accion, servicio) {
         $("#semanaAnterior").prop("disabled", false);
     }
 
-    if (clicks == 20) {
+    if (clicks == 6) {
         $("#semanaSiguiente").prop("disabled", true);
     } else {
         $("#semanaSiguiente").prop("disabled", false);
@@ -223,9 +225,9 @@ function GenerarRegistrosPelo(nombresSemanaSinTilde, fechaComoCadenaInicioSemana
             horaActual = horaActual + horaSeleccionada[1];
             var IDPreparada = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaActual;
             if (parseInt(IDFechaHoraActual) < IDPreparada) {
-                setTimeout(crearBoton(botones, IDPreparada, "Pelo", horasManana[i], nombresSemanaSinTilde), 100);
+                setTimeout(crearBoton(botones, IDPreparada, "Pelo", horasManana[i], nombresSemanaSinTilde), 200);
             } else {
-                setTimeout(crearBotonExpirado(botones, "EXPIRADO", nombresSemanaSinTilde), 100);
+                setTimeout(crearBotonExpirado(botones, "EXPIRADO", IDPreparada), 100);
             }
 
         }
@@ -244,9 +246,9 @@ function GenerarRegistrosPelo(nombresSemanaSinTilde, fechaComoCadenaInicioSemana
             var IDPreparada = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + "1345";
 
             if (parseInt(IDFechaHoraActual) < IDPreparada) {
-                setTimeout(crearBoton(botones, IDPreparada, "Pelo", "13:15 - 14:00", nombresSemanaSinTilde), 100);
+                setTimeout(crearBoton(botones, IDPreparada, "Pelo", "13:15 - 14:00", nombresSemanaSinTilde), 200);
             } else {
-                setTimeout(crearBotonExpirado(botones, "EXPIRADO", nombresSemanaSinTilde), 100);
+                setTimeout(crearBotonExpirado(botones, "EXPIRADO", IDPreparada), 100);
             }
 
         }
@@ -285,9 +287,9 @@ function GenerarRegistrosPelo(nombresSemanaSinTilde, fechaComoCadenaInicioSemana
                 var IDPreparada = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaActual;
 
                 if (parseInt(IDFechaHoraActual) < IDPreparada) {
-                    setTimeout(crearBoton(botones2, IDPreparada, "Pelo", horasTarde[i], nombresSemanaSinTilde), 100);
+                    setTimeout(crearBoton(botones2, IDPreparada, "Pelo", horasTarde[i], nombresSemanaSinTilde), 200);
                 } else {
-                    setTimeout(crearBotonExpirado(botones2, "EXPIRADO", nombresSemanaSinTilde), 100);
+                    setTimeout(crearBotonExpirado(botones2, "EXPIRADO", IDPreparada), 100);
                 }
             }
         }
@@ -357,9 +359,9 @@ function GenerarRegistrosBarba(nombresSemanaSinTilde, fechaComoCadenaInicioSeman
             var IDPreparada = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaActual;
 
             if (parseInt(IDFechaHoraActual) < IDPreparada) {
-                setTimeout(crearBoton(botones, IDPreparada, "Barba", horasManana[i], nombresSemanaSinTilde), 100);
+                setTimeout(crearBoton(botones, IDPreparada, "Barba", horasManana[i], nombresSemanaSinTilde), 200);
             } else {
-                setTimeout(crearBotonExpirado(botones, "EXPIRADO", nombresSemanaSinTilde), 100);
+                setTimeout(crearBotonExpirado(botones, "EXPIRADO", IDPreparada), 100);
             }
 
         }
@@ -377,9 +379,9 @@ function GenerarRegistrosBarba(nombresSemanaSinTilde, fechaComoCadenaInicioSeman
             var IDPreparada = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + "1330";
 
             if (parseInt(IDFechaHoraActual) < IDPreparada) {
-                setTimeout(crearBoton(botones, IDPreparada, "Barba", "13:30 - 14:00", nombresSemanaSinTilde), 100);
+                setTimeout(crearBoton(botones, IDPreparada, "Barba", "13:30 - 14:00", nombresSemanaSinTilde), 200);
             } else {
-                setTimeout(crearBotonExpirado(botones, "EXPIRADO", nombresSemanaSinTilde), 100);
+                setTimeout(crearBotonExpirado(botones, "EXPIRADO", IDPreparada), 100);
             }
 
         }
@@ -419,9 +421,9 @@ function GenerarRegistrosBarba(nombresSemanaSinTilde, fechaComoCadenaInicioSeman
                 var IDPreparada = fechaComoCadenaInicioSemana.getFullYear() + mesActual + diaActual + horaActual;
 
                 if (parseInt(IDFechaHoraActual) < IDPreparada) {
-                    setTimeout(crearBoton(botones2, IDPreparada, "Barba", horasTarde[i], nombresSemanaSinTilde), 100);
+                    setTimeout(crearBoton(botones2, IDPreparada, "Barba", horasTarde[i], nombresSemanaSinTilde), 200);
                 } else {
-                    setTimeout(crearBotonExpirado(botones2, "EXPIRADO", nombresSemanaSinTilde), 100);
+                    setTimeout(crearBotonExpirado(botones2, "EXPIRADO", IDPreparada), 100);
                 }
 
             }
@@ -462,12 +464,13 @@ function crearBoton(botones, IDPreparada, Servicio, horasArray, nombresSemanaSin
     });
 }
 
-function crearBotonExpirado(botones, horasArray) {
+function crearBotonExpirado(botones, horasArray, IDPreparada) {
     let hora = document.createElement("input");
     hora.type = "button";
     hora.value = horasArray;
     hora.className = "w-100 br-5 btn btn-light border border-dark";
     hora.style = "--bs-border-opacity: .5;";
+    hora.id = IDPreparada;
     $(hora).addClass("disabled");
     $(hora).css({ backgroundColor: '#e6dfd1' });
     botones.appendChild(hora);

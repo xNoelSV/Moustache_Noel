@@ -40,6 +40,8 @@ include("../PHP/Reserva/CodigoReserva1.php");
                     <li><a href="paginaPrincipal.php" class="nav-link px-3 text-white subrayadoNav">Home</a></li>
                     <li><a href="Servicios.php" class="nav-link px-3 text-white subrayadoNav">Servicios</a></li>
                     <li><a href="Reserva1.php" class="nav-link px-3 text-white subrayadoNav">Reserva</a></li>
+                    <?php if(isset($_SESSION['esAdmin'])) {?><li><a href="PanelAdministrador.php" class="nav-link px-3 text-white subrayadoNav">Panel de administrador</a></li><?php }?>
+                    <?php if (isset($_SESSION['esAdmin'])) { ?><li><a href="ListadoReservas.php" class="nav-link px-3 text-white subrayadoNav">Listado de reservas</a></li><?php } ?>
                 </ul>
 
                 <div class="dropdown">

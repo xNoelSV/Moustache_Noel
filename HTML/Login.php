@@ -24,7 +24,7 @@ include("../PHP/Login/CodigoLogin.php");
 
 <style>
     body {
-        background: url("../IMG/Servicios2.jpg") no-repeat center center fixed;
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../IMG/MoustacheFondo.png") no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -60,7 +60,7 @@ include("../PHP/Login/CodigoLogin.php");
 <body class="text-center" data-hasqtip="0">
 
     <!-- NAV BAR 2 -->
-    <header class="p-3 text-bg-dark">
+    <header class="p-3 text-bg-dark sticky-top">
         <div class="container-fluid">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="paginaPrincipal.php" class="d-flex align-items-center mb-lg-0 text-white text-decoration-none">

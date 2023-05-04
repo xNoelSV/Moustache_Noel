@@ -24,7 +24,7 @@ include("../PHP/paginaPrincipal/CodigoPaginaPrincipal.php");
 <body class="text-center" data-hasqtip="0">
 
     <!-- NAV BAR 2 -->
-    <header class="p-3 text-bg-dark">
+    <header class="p-3 text-bg-dark sticky-top">
         <div class="container-fluid">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="paginaPrincipal.php" class="d-flex align-items-center mb-lg-0 text-white text-decoration-none">

@@ -4,7 +4,8 @@ var fechaComoCadena = 0;
 var fechaComoCadenaModificada = 0;
 var fechaComoCadenaInicioSemana = 0;
 var clicks = 0;
-var esDomingo = false;
+var horasExpiradas = 0;
+var diaExpirado = false;
 
 window.onload = cargarFechaInicio();
 function cargarFechaInicio() {
@@ -31,28 +32,28 @@ function CargarRegistros(accion, servicio) {
 
     // Si es domingo, se pasa a la semana siguiente (dia actual (domingo) = 1 (lunes))
     // Si es sábado por la tarde, se hace lo mismo
-    let horaMinActual = fechaComoCadena.getHours()+""+fechaComoCadena.getMinutes(); 
-    if ((numeroDia == 0) || ((numeroDia==6) && (horaMinActual > 1345))) {
+    let horaMinActual = fechaComoCadena.getHours() + "" + fechaComoCadena.getMinutes();
+    if ((numeroDia == 0) || ((numeroDia == 6) && (horaMinActual > 1345))) {
         if (numeroDia == 0) {
             fechaComoCadena.setDate(fechaComoCadena.getDate() + 1);
-        } else if ((numeroDia==6) && (horaMinActual > 1345)) {
+        } else if ((numeroDia == 6) && (horaMinActual > 1345)) {
             fechaComoCadena.setDate(fechaComoCadena.getDate() + 2);
         }
         numeroDia = 1;
     }
-    
+
     // Selecciona el mes en el que se encuentra
     var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     var nombreMes = meses[new Date(fechaComoCadena).getMonth()];
     var nombreMesModificado = meses[new Date(fechaComoCadena).getMonth()];
-    
+
     // Le da el valor inicial de la semana correspondiente a la fechaComoCadenaInicioSemana
     fechaComoCadenaInicioSemana.setDate(fechaComoCadena.getDate() - (numeroDia - 1));
     fechaComoCadenaInicioSemana.setMonth(fechaComoCadena.getMonth());
 
     // Se le da el valor del primer dia de la semana a la cadena
     var stringFecha = parseInt(fechaComoCadenaInicioSemana.getDate());
-    
+
     // Administrador que determina los valores de cada dia según la semana en el que nos encontramos
     if (numeroDia == 1) {
         // Parte superior del calendario (Semana actual)
@@ -103,7 +104,7 @@ function CargarRegistros(accion, servicio) {
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
     }
-    
+
     // Imprime la semana en la parte superior del calendario
     document.getElementById("semanaCorrespondiente").innerHTML = "Semana: " + stringFecha + " del " + new Date(fechaComoCadenaModificada).getFullYear();
 
@@ -117,6 +118,7 @@ function CargarRegistros(accion, servicio) {
         diaActual = "0" + diaActual;
     }
     var horaActual = fechaHoyMod.getHours();
+    //var horaActual = 16;
     if (horaActual < 10) {
         horaActual = "0" + horaActual;
     }
@@ -300,7 +302,7 @@ function GenerarRegistrosPelo(nombresSemanaSinTilde, fechaComoCadenaInicioSemana
 // ************************** BARBA **************************
 // ***********************************************************
 
-function GenerarRegistrosBarba(nombresSemanaSinTilde, fechaComoCadenaInicioSemana, IDFechaHoraActual) {
+function GenerarRegistrosBarba(nombresSemanaSinTilde, fechaComoCadenaInicioSemana, IDFechaHoraActual, servicio) {
     var columna = document.getElementById("columna" + nombresSemanaSinTilde);
 
     // En caso de dia no laborable (Lunes & Domingo) se crean los siguientes "alerts"
@@ -444,17 +446,17 @@ function crearBoton(botones, IDPreparada, Servicio, horasArray, nombresSemanaSin
         let hora = document.createElement("input");
         hora.type = "button";
         hora.value = horasArray;
+        //hora.innerHTML = horasArray;
         hora.className = "w-100 br-5 btn btn-light border border-dark";
         hora.style = "--bs-border-opacity: .5;";
         hora.id = IDPreparada;
         hora.setAttribute("onclick", "AbrirModal(this, '" + nombresSemanaSinTilde + "')");
         hora.setAttribute("data-bs-toggle", "modal");
         hora.setAttribute("data-bs-target", "#modalFlotante");
+
         if (msg == "Ocupado") {
             $(hora).addClass("disabled");
             $(hora).css({ backgroundColor: '#cfcfcf' });
-            $(hora).attr("data-bs-toggle", "tooltip");
-            $(hora).attr("data-bs-title", "Hora seleccionada");
         }
         botones.appendChild(hora);
 
@@ -465,6 +467,7 @@ function crearBoton(botones, IDPreparada, Servicio, horasArray, nombresSemanaSin
 }
 
 function crearBotonExpirado(botones, horasArray, IDPreparada) {
+
     let hora = document.createElement("input");
     hora.type = "button";
     hora.value = horasArray;
@@ -474,4 +477,5 @@ function crearBotonExpirado(botones, horasArray, IDPreparada) {
     $(hora).addClass("disabled");
     $(hora).css({ backgroundColor: '#e6dfd1' });
     botones.appendChild(hora);
+
 }

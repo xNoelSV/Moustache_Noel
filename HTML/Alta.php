@@ -7,14 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alta</title>
     <!-- CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="css/estilo.css" rel="stylesheet" type="text/css" />
 
     <!-- JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script language="JavaScript" type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../JS/Alta/JSAlta.js"></script>
 </head>
@@ -23,9 +20,19 @@
 include("../PHP/Alta/CodigoAlta.php");
 ?>
 
+<style>
+    body {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../IMG/MoustacheFondo.png") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+</style>
+
 <body>
     <!-- NAV BAR -->
-    <header class="p-3 text-bg-dark">
+    <header class="p-3 text-bg-dark sticky-top">
         <div class="container-fluid">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="paginaPrincipal.php" class="d-flex align-items-center mb-lg-0 text-white text-decoration-none">
@@ -35,15 +42,12 @@ include("../PHP/Alta/CodigoAlta.php");
                 <ul class="nav col-12 col-lg-auto me-lg-auto col-md-4 me-3 ms-3 mb-2 justify-content-center mb-md-0">
                     <li><a href="paginaPrincipal.php" class="nav-link px-3 text-white subrayadoNav">Home</a></li>
                     <li><a href="Servicios.php" class="nav-link px-3 text-white subrayadoNav">Servicios</a></li>
-                    <li><a <?php if (isset($_SESSION['Nombre'])) { ?> href="Reserva1.php" <?php } else { ?> href="Login.php"
-                            <?php }?> class="nav-link px-3 text-white subrayadoNav">Reserva</a></li>
+                    <li><a <?php if (isset($_SESSION['Nombre'])) { ?> href="Reserva1.php" <?php } else { ?> href="Login.php" <?php } ?> class="nav-link px-3 text-white subrayadoNav">Reserva</a></li>
                 </ul>
 
                 <div class="text-end">
-                    <button type="button" class="btn btn-outline-light me-2"
-                        onclick="window.location.href='Login.php';">Iniciar sesión</button>
-                    <button type="button" class="btn btn-warning"
-                        onclick="window.location.href='Alta.php';">Regístrate</button>
+                    <button type="button" class="btn btn-outline-light me-2" onclick="window.location.href='Login.php';">Iniciar sesión</button>
+                    <button type="button" class="btn btn-warning" onclick="window.location.href='Alta.php';">Regístrate</button>
                 </div>
             </div>
         </div>
@@ -58,30 +62,25 @@ include("../PHP/Alta/CodigoAlta.php");
                 </div>
                 <h6>Nombre:</h6>
                 <div class="mb-3" id="nameUsu">
-                    <input type="text" class="form-control" placeholder="Nombre" name="nameUsuSignup" id="nameUsuSignup"
-                        onblur="comprobarEstadoInputs(1)" required>
+                    <input type="text" class="form-control" placeholder="Nombre" name="nameUsuSignup" id="nameUsuSignup" onblur="comprobarEstadoInputs(1)" required>
                 </div>
                 <h6>Apellido/s:</h6>
                 <div class="mb-3" id="surnameUsu">
-                    <input type="text" class="form-control" placeholder="Apellido/s" name="surnameUsuSignup"
-                        id="surnameUsuSignup" onblur="comprobarEstadoInputs(2)" required>
+                    <input type="text" class="form-control" placeholder="Apellido/s" name="surnameUsuSignup" id="surnameUsuSignup" onblur="comprobarEstadoInputs(2)" required>
                 </div>
                 <h6>Correo electrónico:</h6>
                 <div class="mb-3">
-                    <input type="email" class="form-control" placeholder="Email" id="pk" name="emailUsuSignup"
-                        id="emailUsuSignup" onblur="llamarServidor()">
+                    <input type="email" class="form-control" placeholder="Email" id="pk" name="emailUsuSignup" id="emailUsuSignup" onblur="llamarServidor()">
                     <img id="imgComprobación" style="height: 2.75%; width: 2.75%;" hidden="true" />
                     <span id="textoComprobación" style="font-size: 12px;"></span>
                 </div>
                 <h6>Contraseña:</h6>
                 <div class="mb-3" id="passUsu">
-                    <input type="password" class="form-control" placeholder="Password" name="passUsuSignup"
-                        id="passUsuSignup" onblur="comprobarEstadoInputs(3)" required>
+                    <input type="password" class="form-control" placeholder="Password" name="passUsuSignup" id="passUsuSignup" onblur="comprobarEstadoInputs(3)" required>
                 </div>
                 <h6>Confirmar contraseña:</h6>
                 <div class="mb-3" id="pass2Usu">
-                    <input type="password" class="form-control" placeholder="Confirmar password" name="pass2UsuSignup"
-                        id="pass2UsuSignup" onblur="comprobarEstadoInputs(4)" required>
+                    <input type="password" class="form-control" placeholder="Confirmar password" name="pass2UsuSignup" id="pass2UsuSignup" onblur="comprobarEstadoInputs(4)" required>
                 </div>
                 <div class="mb-3">
                     <input type="checkbox" name="terms" id="terms" onchange="estadoCheckbox()">
@@ -89,14 +88,12 @@ include("../PHP/Alta/CodigoAlta.php");
                             condiciones</a></span>
 
                     <!-- Modal -->
-                    <div class="modal fade staticBackdrop" id="staticBackdrop" data-bs-backdrop="static"
-                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade staticBackdrop" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg modal-dialog-scrollable">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Términos y condiciones</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <b>Términos y condiciones</b><br>
@@ -325,12 +322,11 @@ include("../PHP/Alta/CodigoAlta.php");
                                     <b>Pagos a través de la web</b>
                                     <br>
                                     La compañía Moustache no se hace cargo de los datos recaudados a la hora de realizar
-                                    los pagos a través de la compañía proveedora "PayPal". Toda acción consecuente no va 
+                                    los pagos a través de la compañía proveedora "PayPal". Toda acción consecuente no va
                                     a responabilizar a la barbería.
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                 </div>
                             </div>
                         </div>
@@ -344,8 +340,7 @@ include("../PHP/Alta/CodigoAlta.php");
                 ?>
 
                 <div class="container-fluid text-center mt-4">
-                    <input type="submit" class="btn btn-warning w-50" value="Registrarse" id="btnRegistrar"
-                        name="btnUsuSignup" disabled="true">
+                    <input type="submit" class="btn btn-warning w-50" value="Registrarse" id="btnRegistrar" name="btnUsuSignup" disabled="true">
                 </div>
             </div>
         </form>

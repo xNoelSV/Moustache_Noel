@@ -117,7 +117,7 @@ include("../PHP/Login/CodigoLogin.php");
                     ?>
                 </div>
 
-                <input type="submit" class="w-75 btn btn-lg btn-primary" name="btnLogin" value="Sign in">
+                <input type="submit" class="w-75 btn btn-lg btn-warning" name="btnLogin" value="Sign in">
                 <!-- onclick="validarUsuario()" -->
                 <p class="mt-4 mb-1 text-muted">© 2017–2023</p>
             </form>

@@ -62,8 +62,40 @@ include("../PHP/ListadoReservas/CodigoListadoReservas.php");
         </div>
     </header>
 
-    
+    <!-- SÍMBOLOS DE BOOTSTRAP -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="arrow-right-short" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"></path>
+        </symbol>
+        <symbol id="arrow-left-short" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"></path>
+        </symbol>
+    </svg>
 
+    <!-- PANEL LISTADO -->
+    <h1 class="mt-5">Listado de reservas</h1>
+    <form method="POST">
+        <div class="container-fluid mt-4" style="width: 90%; background-color: #dec995; border-radius: 10px;">
+
+            <!-- SEMANA CORRESPONDIENTE -->
+            <div class="pb-3 pt-2" id="btnsCambiarSemana">
+                <h3 id="semanaCorrespondiente">asdadasda</h3>
+                <button class="btn btn-secondary d-inline-flex align-items-center" id="semanaAnterior" type="button" <?php if ($_SESSION['servicio'] == "Pelo") { ?>onclick="CargarRegistros('atras', 'Pelo')" <?php } else if ($_SESSION['servicio'] == "Barba") { ?>onclick="CargarRegistros('atras', 'Barba')" <?php } ?>>
+                    <svg class="bi me-1" width="20" height="20" fill="currentColor">
+                        <use xlink:href="#arrow-left-short"></use>
+                    </svg>
+                    Semana anterior
+                </button>
+                <button class="btn btn-secondary d-inline-flex align-items-center" id="semanaSiguiente" type="button" <?php if ($_SESSION['servicio'] == "Pelo") { ?>onclick="CargarRegistros('delante', 'Pelo')" <?php } else if ($_SESSION['servicio'] == "Barba") { ?>onclick="CargarRegistros('delante', 'Barba')" <?php } ?>>
+                    Semana siguiente
+                    <svg class="bi ms-1" width="20" height="20" fill="currentColor">
+                        <use xlink:href="#arrow-right-short"></use>
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+    </form>
 </body>
 
 </html>

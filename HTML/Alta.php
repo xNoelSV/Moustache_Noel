@@ -31,27 +31,31 @@ include("../PHP/Alta/CodigoAlta.php");
 </style>
 
 <body>
-    <!-- NAV BAR -->
-    <header class="p-3 text-bg-dark sticky-top">
+    
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg text-bg-dark p-3 sticky-top">
         <div class="container-fluid">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="paginaPrincipal.php" class="d-flex align-items-center mb-lg-0 text-white text-decoration-none">
-                    <img src="../IMG/LogoSinFondo.png" width="75" height="50">
-                </a>
-
-                <ul class="nav col-12 col-lg-auto me-lg-auto col-md-4 me-3 ms-3 mb-2 justify-content-center mb-md-0">
-                    <li><a href="paginaPrincipal.php" class="nav-link px-3 text-white subrayadoNav">Home</a></li>
-                    <li><a href="Servicios.php" class="nav-link px-3 text-white subrayadoNav">Servicios</a></li>
-                    <li><a <?php if (isset($_SESSION['Nombre'])) { ?> href="Reserva1.php" <?php } else { ?> href="Login.php" <?php } ?> class="nav-link px-3 text-white subrayadoNav">Reserva</a></li>
+            <a href="paginaPrincipal.php" class="d-flex align-items-center mb-lg-0 me-3 text-white text-decoration-none">
+                <img class="" src="../IMG/LogoSinFondo.png" width="75" height="50">
+            </a>
+            <button class="navbar-toggler bg-warning" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav col-12 col-lg-auto me-lg-auto mb-2 me-auto justify-content-center text-center mb-md-0">
+                    <li class="nav-item"><a href="paginaPrincipal.php" class="nav-link px-3 text-white subrayadoNav">Home</a></li>
+                    <li class="nav-item"><a href="Servicios.php" class="nav-link px-3 text-white subrayadoNav">Servicios</a></li>
+                    <li class="nav-item"><a href="Login.php" class="nav-link px-3 text-white subrayadoNav">Reserva</a></li>
                 </ul>
-
-                <div class="text-end">
-                    <button type="button" class="btn btn-outline-light me-2" onclick="window.location.href='Login.php';">Iniciar sesión</button>
-                    <button type="button" class="btn btn-warning" onclick="window.location.href='Alta.php';">Regístrate</button>
-                </div>
+                <form class="d-flex" role="search">
+                    <div class="text-center w-100">
+                        <button type="button" class="btn btn-outline-light me-2" onclick="window.location.href='Login.php';">Iniciar sesión</button>
+                        <button type="button" class="btn btn-warning" onclick="window.location.href='Alta.php';">Regístrate</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </header>
+    </nav>
 
     <div class="col-md-6 offset-md-3 mt-5 mb-5">
         <!-- FORMULARIO ALTA -->

@@ -24,8 +24,8 @@ include("../PHP/Servicios/CodigoServicios.php");
 
 <style>
     #thumbnails img {
-        width: 70px;
-        height: 70px;
+        width: 100px;
+        height: 100px;
     }
 </style>
 
@@ -60,7 +60,9 @@ include("../PHP/Servicios/CodigoServicios.php");
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                             <li><a class="dropdown-item" href="ModificarUsuario.php">Modificar usuario</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" onclick="cerrarSession()">Cerrar sessión</a></li>
                         </ul>
                     </div>
@@ -87,30 +89,32 @@ include("../PHP/Servicios/CodigoServicios.php");
 
             </div>
         </div>
+    </div>
 
-        <!-- CARRUSEL DE IMÁGENES -->
-        <div class="row align-items-center" style="margin-top: 7.5%; margin-left:15%; margin-right: 15%;">
-            <div class="col-3">
-                <svg id="izq" onclick="imgIzq()" xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
-                </svg>
+    <!-- CARRUSEL DE IMÁGENES -->
+    <div class="container col-sm-9">
+        <img src="../IMG/CarrousselServicios/1.jpg" class="img-fluid shadow-lg mb-5 rounded" id="imgCentral" />
+    </div>
+    <div class="row align-items-center w-100">
+        <div class="col-3 text-end">
+            <svg id="izq" onclick="imgIzq()" xmlns="http://www.w3.org/2000/svg" width="125px" height="125px" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+            </svg>
+        </div>
+        <div class="col-6 text-center">
+            <div id="thumbnails">
+                <img src="../IMG/CarrousselServicios/1.jpg" id="img1" onclick="imgClick(1)" />
+                <img src="../IMG/CarrousselServicios/2.jpg" id="img2" onclick="imgClick(2)" />
+                <img src="../IMG/CarrousselServicios/3.jpg" id="img3" onclick="imgClick(3)" />
+                <img src="../IMG/CarrousselServicios/4.jpg" id="img4" onclick="imgClick(4)" />
+                <img src="../IMG/CarrousselServicios/5.jpg" id="img5" onclick="imgClick(5)" />
+                <img src="../IMG/CarrousselServicios/6.jpg" id="img6" onclick="imgClick(6)" />
             </div>
-            <div class="col-6">
-                <img src="../IMG/CarrousselServicios/1.jpg" class="img-fluid shadow-lg mb-5 rounded" id="imgCentral" style="width: 100%; height: 75%; margin: 0 auto; float:left;" />
-                <div id="thumbnails">
-                    <img src="../IMG/CarrousselServicios/1.jpg" id="img1" onclick="imgClick(1)" />
-                    <img src="../IMG/CarrousselServicios/2.jpg" id="img2" onclick="imgClick(2)" />
-                    <img src="../IMG/CarrousselServicios/3.jpg" id="img3" onclick="imgClick(3)" />
-                    <img src="../IMG/CarrousselServicios/4.jpg" id="img4" onclick="imgClick(4)" />
-                    <img src="../IMG/CarrousselServicios/5.jpg" id="img5" onclick="imgClick(5)" />
-                    <img src="../IMG/CarrousselServicios/6.jpg" id="img6" onclick="imgClick(6)" />
-                </div>
-            </div>
-            <div class="col-3">
-                <svg id="der" onclick="imgDer()" xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-                </svg>
-            </div>
+        </div>
+        <div class="col-3 text-start">
+            <svg id="der" onclick="imgDer()" xmlns="http://www.w3.org/2000/svg" width="125px" height="125px" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+            </svg>
         </div>
     </div>
 

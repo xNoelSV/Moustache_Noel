@@ -7,6 +7,7 @@ if (empty($_SESSION['pagoRealizado'])) {
 // Se conecta a la BD
 include('../PHP/BD_Connector.php');
 
+// Guarda la reserva en la base de datos.
 $servicio = $_SESSION['servicio'];
 $idReserva = $_SESSION['fechaReserva'];
 $idUsuario = $_SESSION['ID'];

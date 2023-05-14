@@ -20,3 +20,5 @@ if ($stmt->rowCount() == 0) {
 } else {
     echo "Ocupado";
 }
+
+?>

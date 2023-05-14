@@ -12,6 +12,9 @@ if ($_SESSION['ID'] != 0) {
 if (isset($_POST['irListado'])) {
     header('Location: ListadoReservas.php');
 }
+if (isset($_POST['irReserva'])) {
+    header('Location: Reserva1.php');
+}
 
 if (isset($_POST['btnConfirmar'])) {
 

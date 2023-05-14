@@ -53,7 +53,9 @@ include("../PHP/PanelAdministrador/CodigoPanelAdministrador.php");
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                             <li><a class="dropdown-item" href="ModificarUsuario.php">Modificar usuario</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" onclick="cerrarSession()">Cerrar sessión</a></li>
                         </ul>
                     </div>
@@ -89,11 +91,18 @@ include("../PHP/PanelAdministrador/CodigoPanelAdministrador.php");
                 <!-- LISTADO DE RESERVAS -->
                 <div class="text-center mt-3 mb-4">
                     <h1 class="mb-4">Listado de reservas</h1>
-                    <div class="container text-center fs-5">
-                        <div class="col">
-                            <input type="submit" value="Siguiente" class="w-50 br-5 btn btn-warning btn2" id="irListado" name="irListado"></input>
-                        </div>
-                    </div>
+                    <input type="submit" value="Siguiente" class="w-50 br-5 btn btn-warning btn2 text-center" id="irListado" name="irListado"></input>
+                </div>
+
+                <!-- SEPARADOR -->
+                <div class="text-center">
+                    <img src="../IMG/separadorDeTexto.png" class="img-fluid " height="75" width="250" />
+                </div>
+
+                <!-- NUEVA RESERVA -->
+                <div class="text-center mb-4 p-3" style="width: 90%; height: 50%; margin: 0px auto; background-color: #dec995; border-radius: 10px;">
+                    <h1 class="mb-4">Nueva reserva</h1>
+                    <input type="submit" value="Siguiente" class="w-50 br-5 btn btn-warning btn2 text-center" id="irReserva" name="irReserva"></input>
                 </div>
 
                 <!-- SEPARADOR -->

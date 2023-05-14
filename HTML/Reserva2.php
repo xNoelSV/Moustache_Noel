@@ -83,8 +83,10 @@ include("../PHP/Reserva/CodigoReserva2.php");
     <!-- TABLA DÍAS RESERVA -->
     <form method="POST">
         <div class="container ps-5 pe-5 mt-5 w-100 mb-5 pb-5" id="tablaRegistros">
+            <!-- PARTE SUPERIOR / CAMBIO DE SEMANA -->
             <div class="mb-3" id="btnsCambiarSemana">
                 <h3 id="semanaCorrespondiente"></h3>
+                <p class="fst-italic" id="semanaAdelantadaAtrasada"></p>
                 <button class="btn btn-secondary d-inline-flex align-items-center" id="semanaAnterior" type="button" <?php if ($_SESSION['servicio'] == "Pelo") { ?>onclick="CargarRegistros('atras', 'Pelo')" <?php } else if ($_SESSION['servicio'] == "Barba") { ?>onclick="CargarRegistros('atras', 'Barba')" <?php } ?>>
                     <svg class="bi me-1" width="20" height="20" fill="currentColor">
                         <use xlink:href="#arrow-left-short"></use>
@@ -98,6 +100,7 @@ include("../PHP/Reserva/CodigoReserva2.php");
                     </svg>
                 </button>
             </div>
+            <!-- DÍAS DE LA SEMANA -->
             <div class="row" style="background-color: #e8d1b5;">
                 <div class="fw-bold col-sm col-12 border border-secondary pb-3 ps-0 pe-0" id="columnaLunes">
                     <p class="p-3 mb-3 border-bottom border-secondary" id="textoColumnaLunes" style="background-color: #ffc107;">Lunes</p>
@@ -135,12 +138,16 @@ include("../PHP/Reserva/CodigoReserva2.php");
                         </div>
                         <div class="modal-body text-start">
                             <p id="textoModal"></p>
+                            <?php if(isset($_SESSION['esAdmin'])) { ?>
+                            <p class="fw-bold">Nombre de la reserva: </p>
+                            <input type="text" id="nombreReserva" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="nombreReserva" onkeypress="habilitarReserva()"> </input>
+                            <?php } ?>
                             <input type="hidden" name="dataStoredDate" id="dataStoredDate"></input>
                             <input type="hidden" name="dataStoredStr" id="dataStoredStr"></input>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Rechazar</button>
-                            <input type="submit" class="btn btn-success" name="btnEnviar" id="btnEnviar" value="Confirmar">
+                            <input type="submit" class="btn btn-success" name="btnEnviar" id="btnEnviar" value="Confirmar" <?php if (isset($_SESSION['esAdmin'])) { ?> disabled <?php } ?>>
                         </div>
                     </div>
                 </div>

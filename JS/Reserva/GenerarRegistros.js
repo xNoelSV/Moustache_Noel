@@ -1,11 +1,10 @@
-//var xmlhttp = new XMLHttpRequest();
 var fechaHoy = 0;
 var fechaComoCadena = 0;
 var fechaComoCadenaModificada = 0;
 var fechaComoCadenaInicioSemana = 0;
 var clicks = 0;
-var horasExpiradas = 0;
-var diaExpirado = false;
+// var horasExpiradas = 0;
+// var diaExpirado = false;
 
 window.onload = cargarFechaInicio();
 function cargarFechaInicio() {
@@ -161,6 +160,13 @@ function CargarRegistros(accion, servicio) {
         $("#semanaSiguiente").prop("disabled", true);
     } else {
         $("#semanaSiguiente").prop("disabled", false);
+    }
+
+    // Muestra las semanas que se han adelantado o atrasado
+    $("#semanaAdelantadaAtrasada").hide()
+    if (clicks != 0) {
+        $("#semanaAdelantadaAtrasada").show();
+        $("#semanaAdelantadaAtrasada").text("(+" + clicks + " semana/s)");
     }
 
 }

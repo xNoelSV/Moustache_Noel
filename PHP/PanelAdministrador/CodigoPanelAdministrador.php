@@ -7,8 +7,6 @@ if (!isset($_SESSION['ID'])) {
 if ($_SESSION['ID'] != 0) {
     header('Location: paginaPrincipal.php');
 }
-
-
 if (isset($_POST['irListado'])) {
     header('Location: ListadoReservas.php');
 }

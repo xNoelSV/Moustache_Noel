@@ -195,7 +195,7 @@ include("../PHP/ListadoReservas/CodigoListadoReservas.php");
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- SEPARADOR -->
                 <div class="text-center pb-3">
                     <img src="../IMG/separadorDeTexto.png" class="img-fluid " height="75" width="250" />

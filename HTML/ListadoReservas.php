@@ -177,7 +177,7 @@ include("../PHP/ListadoReservas/CodigoListadoReservas.php");
                         <input type="hidden" id="servicioSeleccionado" value="TODO" />
                         <!-- PARTE CENTRAL -->
                         <div class="col">
-                            <button type="button" class="btn btn-outline-dark" id="btnRecargar" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Recargar" onclick="CambiarServicio()">
+                            <button type="button" class="btn btn-outline-dark" id="btnRecargar" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Recargar lista" onclick="CambiarServicio('Recargar')">
                                 <svg class="bi align-middle" width="20" height="20" fill="currentColor">
                                     <use xlink:href="#recharge"></use>
                                 </svg>
@@ -210,24 +210,6 @@ include("../PHP/ListadoReservas/CodigoListadoReservas.php");
                             <use xlink:href="#alert"></use>
                         </svg>
                         <span> No hay registros para este día </span>
-                    </div>
-
-                    <!-- CABECERA -->
-                    <div class="container text-center" id="cabeceraLista">
-                        <div class="row align-items-start rounded-top" style="background-color: #ECECEC;">
-                            <div class="col p-2 border-end border-2">
-                                Nombre del cliente
-                            </div>
-                            <div class="col p-2 border-end border-2" id="servicioLista">
-                                Servicio
-                            </div>
-                            <div class="col p-2 border-end border-2">
-                                Hora de reserva
-                            </div>
-                            <div class="col p-2">
-                                Acciones
-                            </div>
-                        </div>
                     </div>
 
                     <!-- REGISTROS DE LA LISTA -->

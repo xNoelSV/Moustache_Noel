@@ -134,76 +134,44 @@ function GenerarRegistros(datosRecuperados, servicio) {
 
     // Genera los registros según el servicio
     $("#registrosLista").append("<ul class='list-group rounded-bottom' id='listaReservas'></ul>");
+    if (servicio == "TODO") {
+        $("#listaReservas").append("<li class='list-group-item p-0' style='background-color: #DADADA;'><div class='row align-items-start rounded-top'><div class='col p-2 border-end border-secondary-subtle border-2'>Nombre del cliente</div><div class='col p-2 border-end border-secondary-subtle border-2' id='servicioLista'>Servicio</div><div class='col p-2 border-end border-secondary-subtle border-2'>Hora de reserva</div><div class='col p-2'>Acciones</div></div></li>");
+    } else {
+        $("#listaReservas").append("<li class='list-group-item p-0' style='background-color: #DADADA;'><div class='row align-items-start rounded-top'><div class='col p-2 border-end border-secondary-subtle border-2'>Nombre del cliente</div><div class='col p-2 border-end border-secondary-subtle border-2'>Hora de reserva</div><div class='col p-2'>Acciones</div></div></li>");
+    }
+
     for (let i = 0; i < datosRecuperados.length; i++) {
         let reserva = datosRecuperados[i];
 
+        // Guarda en formato "Date" la fecha de reserva
+        if (reserva[1] == "Barba") {
+            var horaReserva = new Date(reserva[3]);
+        } else {
+            var horaReserva = new Date(reserva[2]);
+        }
+
+        // Parsea el date a su correspondiente formato.
+        let hora = horaReserva.getHours();
+        let minutos = horaReserva.getMinutes();
+        if (hora < 10) {
+            hora = "0" + hora;
+        }
+        if (minutos < 10) {
+            minutos = "0" + minutos;
+        }
+
+        // Genera el registros
         if (servicio == "TODO") {
             if (reserva[1] == "Barba") {
                 $("#listaReservas").append("<li class='list-group-item p-0' id='Barba" + reserva[0] + "'>");
-                $("#Barba" + reserva[0]).append("<div class='container text-center' id='espacio" + i + "'>");
+                $("#Barba" + reserva[0]).append("<div class='row align-items-start rounded-top'><div class='col border-end border-2 p-2'>" + reserva[2] + "</div><div class='col border-end border-2 p-2'>Retocado de barba</div><div class='col border-end border-2 p-2'>" + hora + ":" + minutos + "</div><div class='col p-2'></div></div>");
             } else {
                 $("#listaReservas").append("<li class='list-group-item p-0' id='Pelo" + reserva[0] + "'>");
-                $("#Pelo" + reserva[0]).append("<div class='container text-center' id='espacio" + i + "'>");
+                $("#Pelo" + reserva[0]).append("<div class='row align-items-start rounded-top'><div class='col border-end border-2 p-2'>" + reserva[1] + "</div><div class='col border-end border-2 p-2'>Corte de pelo</div><div class='col border-end border-2 p-2'>" + hora + ":" + minutos + "</div><div class='col p-2'></div></div>");
             }
         } else {
             $("#listaReservas").append("<li class='list-group-item p-0' id='" + reserva[0] + "'>");
-            $("#" + reserva[0]).append("<div class='container text-center' id='espacio" + i + "'>");
-        }
-
-        $("#espacio" + i).append("<div class='row align-items-start pt-2 pb-2 border-bottom' id='registro" + i + "'>");
-
-        if (servicio == "TODO") {
-            // Controla la hora de la reserva
-            if (reserva[1] == "Barba") {
-                var horaReserva = new Date(reserva[3]);
-            } else {
-                var horaReserva = new Date(reserva[2]);
-            }
-            let hora = horaReserva.getHours();
-            let minutos = horaReserva.getMinutes();
-            if (hora < 10) {
-                hora = "0" + hora;
-            }
-            if (minutos < 10) {
-                minutos = "0" + minutos;
-            }
-
-            // Genera el registro
-            if (reserva[1] == "Barba") {
-                $("#registro" + i).append("<div class='col'>" + reserva[2] + "</div><div class='vr p-0'></div><div class='col'>Retocado de barba</div><div class='vr p-0'></div><div class='col'>" + hora + ":" + minutos + "</div><div class='vr p-0'></div><div class='col'></div>");
-            } else {
-                $("#registro" + i).append("<div class='col'>" + reserva[1] + "</div><div class='vr p-0'></div><div class='col'>Corte de pelo</div><div class='vr p-0'></div><div class='col'>" + hora + ":" + minutos + "</div><div class='vr p-0'></div><div class='col'></div>");
-            }
-        } else {
-            // Controla la hora de la reserva
-            var horaReserva = new Date(reserva[2]);
-            let hora = horaReserva.getHours();
-            let minutos = horaReserva.getMinutes();
-            if (hora < 10) {
-                hora = "0" + hora;
-            }
-            if (minutos < 10) {
-                minutos = "0" + minutos;
-            }
-
-            // Genera el registro
-            if (reserva[1] == "Barba") {
-                $("#registro" + i).append("<div class='col'>" + reserva[2] + "</div><div class='vr p-0'></div><div class='vr p-0'></div><div class='col'>" + hora + ":" + minutos + "</div><div class='vr p-0'></div><div class='col'></div>");
-            } else {
-                $("#registro" + i).append("<div class='col'>" + reserva[1] + "</div><div class='vr p-0'></div><div class='vr p-0'></div><div class='col'>" + hora + ":" + minutos + "</div><div class='vr p-0'></div><div class='col'></div>");
-            }
-        }
-
-        if (i == 0) {
-            if (servicio == "TODO") {
-                if (reserva[1] == "Barba") {
-                    $("#Barba" + reserva[0]).addClass("rounded-0");
-                } else {
-                    $("#Pelo" + reserva[0]).addClass("rounded-0");
-                }
-            } else {
-                $("#" + reserva[0]).addClass("rounded-0");
-            }
+            $("#" + reserva[0]).append("<div class='row align-items-start rounded-top'><div class='col border-end border-2 p-2'>" + reserva[1] + "</div><div class='col border-end border-2 p-2'>" + hora + ":" + minutos + "</div><div class='col p-2'></div></div>");
         }
     }
 
@@ -214,14 +182,20 @@ function GenerarRegistros(datosRecuperados, servicio) {
 // ******************************************************************************************************
 
 function CambiarServicio(servicio) {
-    $("#servicioSeleccionado").val(servicio);
-    if (servicio == "TODO") {
-        $("#desplegableServicio").text("Servicio: Todo");
-    } else if (servicio == "Pelo") {
-        $("#desplegableServicio").text("Servicio: Corte de pelo");
-    } else if (servicio == "Barba") {
-        $("#desplegableServicio").text("Servicio: Retocado de barba");
-    }
+    // Si se pulsa el botón de recarga
+    if (servicio == "Recargar") {
+        servicio = $("#servicioSeleccionado").val();
 
+    // Si se selecciona cualquier servicio del desplegable
+    } else {
+        $("#servicioSeleccionado").val(servicio);
+        if (servicio == "TODO") {
+            $("#desplegableServicio").text("Servicio: Todo");
+        } else if (servicio == "Pelo") {
+            $("#desplegableServicio").text("Servicio: Corte de pelo");
+        } else if (servicio == "Barba") {
+            $("#desplegableServicio").text("Servicio: Retocado de barba");
+        }
+    }
     RecuperarRegistros(IDFechaActual, servicio);
 }

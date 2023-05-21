@@ -15,6 +15,7 @@
     <script type="text/javascript" src="../JS/Servicios/JSServicios.js"></script>
     <script type="text/javascript" src="../JS/Servicios/Carroussel.js"></script>
     <script type="text/javascript" src="../JS/cerrarSession.js"></script>
+    <script type="text/javascript" src="../JS/volverArriba.js"></script>
     <script language="JavaScript" type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 
@@ -95,13 +96,13 @@ include("../PHP/Servicios/CodigoServicios.php");
     <div class="container col-sm-9">
         <img src="../IMG/CarrousselServicios/1.jpg" class="img-fluid shadow-lg mb-5 rounded" id="imgCentral" />
     </div>
-    <div class="row align-items-center w-100">
-        <div class="col-3 text-end">
-            <svg id="izq" onclick="imgIzq()" xmlns="http://www.w3.org/2000/svg" width="125px" height="125px" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+    <div class="row align-items-center w-100 m-0">
+        <div class="col-3 text-end p-0">
+            <svg id="izq" onclick="imgIzq()" xmlns="http://www.w3.org/2000/svg" width="95px" height="95px" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
             </svg>
         </div>
-        <div class="col-6 text-center">
+        <div class="col-6 text-center p-0">
             <div id="thumbnails">
                 <img src="../IMG/CarrousselServicios/1.jpg" id="img1" onclick="imgClick(1)" />
                 <img src="../IMG/CarrousselServicios/2.jpg" id="img2" onclick="imgClick(2)" />
@@ -111,12 +112,22 @@ include("../PHP/Servicios/CodigoServicios.php");
                 <img src="../IMG/CarrousselServicios/6.jpg" id="img6" onclick="imgClick(6)" />
             </div>
         </div>
-        <div class="col-3 text-start">
-            <svg id="der" onclick="imgDer()" xmlns="http://www.w3.org/2000/svg" width="125px" height="125px" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+        <div class="col-3 text-start p-0">
+            <svg id="der" onclick="imgDer()" xmlns="http://www.w3.org/2000/svg" width="95px" height="95px" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
             </svg>
         </div>
     </div>
+
+    <!-- BOTÓN "VOLVER ARRIBA" -->
+    <button class="btn btn-dark" onclick="topFunction()" id="volverArriba" title="Ir arriba"
+        style="position: fixed; bottom: 20px; right: 30px; z-index: 99;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up"
+            viewBox="0 0 16 16">
+            <path
+                d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z" />
+        </svg>
+    </button>
 
 </body>
 

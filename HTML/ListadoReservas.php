@@ -199,6 +199,7 @@ include("../PHP/ListadoReservas/CodigoListadoReservas.php");
                 <!-- SEPARADOR -->
                 <div class="text-center pb-3">
                     <img src="../IMG/separadorDeTexto.png" class="img-fluid " height="75" width="250" />
+                    <div class="fst-italic" id="indicadorReserva"> <span class="rounded-3" style="background-color: #ffd4d4; color: transparent;">-----</span> : Reserva no pagada </div>
                 </div>
 
                 <!-- LISTADO -->

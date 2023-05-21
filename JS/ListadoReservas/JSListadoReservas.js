@@ -107,10 +107,12 @@ function RecuperarRegistros(IDFechaActual, servicio) {
                 $("#cabeceraLista").hide();
                 $("#registrosLista").hide();
                 $("#alertLista").show();
+                $("#indicadorReserva").hide();
             } else {
                 $("#cabeceraLista").show();
                 $("#registrosLista").show();
                 $("#alertLista").hide();
+                $("#indicadorReserva").show();
                 let resul = jQuery.parseJSON(resultado);
                 GenerarRegistros(resul, servicio);
             }
@@ -125,6 +127,14 @@ function GenerarRegistros(datosRecuperados, servicio) {
         $("#listaReservas").remove();
     }
 
+    // Genera los registros según el servicio
+    $("#registrosLista").append("<ul class='list-group rounded-bottom' id='listaReservas'></ul>");
+    if (servicio == "TODO") {
+        $("#listaReservas").append("<li class='list-group-item p-0' style='background-color: #DADADA;'><div class='row align-items-start rounded-top fw-medium'><div class='col p-2 border-end border-secondary-subtle border-2'>Nombre del cliente</div><div class='col p-2 border-end border-secondary-subtle border-2' id='servicioLista'>Servicio</div><div class='col p-2 border-end border-secondary-subtle border-2'>Hora de reserva</div><div class='col p-2'>Acciones</div></div></li>");
+    } else {
+        $("#listaReservas").append("<li class='list-group-item p-0' style='background-color: #DADADA;'><div class='row align-items-start rounded-top fw-medium'><div class='col p-2 border-end border-secondary-subtle border-2'>Nombre del cliente</div><div class='col p-2 border-end border-secondary-subtle border-2'>Hora de reserva</div><div class='col p-2'>Acciones</div></div></li>");
+    }
+
     // Comprueba el servicio que al que se le hace la petición
     if (servicio != "TODO") {
         $("#servicioLista").hide();
@@ -132,14 +142,7 @@ function GenerarRegistros(datosRecuperados, servicio) {
         $("#servicioLista").show();
     }
 
-    // Genera los registros según el servicio
-    $("#registrosLista").append("<ul class='list-group rounded-bottom' id='listaReservas'></ul>");
-    if (servicio == "TODO") {
-        $("#listaReservas").append("<li class='list-group-item p-0' style='background-color: #DADADA;'><div class='row align-items-start rounded-top'><div class='col p-2 border-end border-secondary-subtle border-2'>Nombre del cliente</div><div class='col p-2 border-end border-secondary-subtle border-2' id='servicioLista'>Servicio</div><div class='col p-2 border-end border-secondary-subtle border-2'>Hora de reserva</div><div class='col p-2'>Acciones</div></div></li>");
-    } else {
-        $("#listaReservas").append("<li class='list-group-item p-0' style='background-color: #DADADA;'><div class='row align-items-start rounded-top'><div class='col p-2 border-end border-secondary-subtle border-2'>Nombre del cliente</div><div class='col p-2 border-end border-secondary-subtle border-2'>Hora de reserva</div><div class='col p-2'>Acciones</div></div></li>");
-    }
-
+    // Recorre los registros recuperados de la base de datos
     for (let i = 0; i < datosRecuperados.length; i++) {
         let reserva = datosRecuperados[i];
 
@@ -150,7 +153,7 @@ function GenerarRegistros(datosRecuperados, servicio) {
             var horaReserva = new Date(reserva[2]);
         }
 
-        // Parsea el date a su correspondiente formato.
+        // Parsea el date a su correspondiente formato
         let hora = horaReserva.getHours();
         let minutos = horaReserva.getMinutes();
         if (hora < 10) {
@@ -163,14 +166,14 @@ function GenerarRegistros(datosRecuperados, servicio) {
         // Genera el registros
         if (servicio == "TODO") {
             if (reserva[1] == "Barba") {
-                $("#listaReservas").append("<li class='list-group-item p-0' id='Barba" + reserva[0] + "'>");
+                $("#listaReservas").append("<li class='list-group-item p-0' id='Barba" + reserva[0] + "' style='background-color: " + reserva[4] + "'>");
                 $("#Barba" + reserva[0]).append("<div class='row align-items-start rounded-top'><div class='col border-end border-2 p-2'>" + reserva[2] + "</div><div class='col border-end border-2 p-2'>Retocado de barba</div><div class='col border-end border-2 p-2'>" + hora + ":" + minutos + "</div><div class='col p-2'></div></div>");
             } else {
-                $("#listaReservas").append("<li class='list-group-item p-0' id='Pelo" + reserva[0] + "'>");
+                $("#listaReservas").append("<li class='list-group-item p-0' id='Pelo" + reserva[0] + "' style='background-color: " + reserva[3] + "'>");
                 $("#Pelo" + reserva[0]).append("<div class='row align-items-start rounded-top'><div class='col border-end border-2 p-2'>" + reserva[1] + "</div><div class='col border-end border-2 p-2'>Corte de pelo</div><div class='col border-end border-2 p-2'>" + hora + ":" + minutos + "</div><div class='col p-2'></div></div>");
             }
         } else {
-            $("#listaReservas").append("<li class='list-group-item p-0' id='" + reserva[0] + "'>");
+            $("#listaReservas").append("<li class='list-group-item p-0' id='" + reserva[0] + "' style='background-color: " + reserva[3] + "'>");
             $("#" + reserva[0]).append("<div class='row align-items-start rounded-top'><div class='col border-end border-2 p-2'>" + reserva[1] + "</div><div class='col border-end border-2 p-2'>" + hora + ":" + minutos + "</div><div class='col p-2'></div></div>");
         }
     }

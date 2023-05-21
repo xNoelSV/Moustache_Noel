@@ -57,9 +57,9 @@ if (($stmt->rowCount() == 0) && ($servicioSeleccionado == true)) {
             $stmt3->setFetchMode(PDO::FETCH_ASSOC);
             $stmt3->execute();
             $row2 = $stmt3->fetch();
-            array_push($arrayDatos, array($row["IDReserva"], $row2['name'], $row["fechaReserva"]));
+            array_push($arrayDatos, array($row["IDReserva"], $row2['name'], $row["fechaReserva"], "white"));
         } else {
-            array_push($arrayDatos, array($row["IDReserva"], $row["NombreReserva"], $row["fechaReserva"]));
+            array_push($arrayDatos, array($row["IDReserva"], $row["NombreReserva"], $row["fechaReserva"], "#ffd4d4"));
         }
     }
 
@@ -72,9 +72,9 @@ if (($stmt->rowCount() == 0) && ($servicioSeleccionado == true)) {
                 $stmt3->setFetchMode(PDO::FETCH_ASSOC);
                 $stmt3->execute();
                 $row2 = $stmt3->fetch();
-                array_push($arrayDatos, array($row["IDReserva"], "Barba", $row2['name'], $row["fechaReserva"]));
+                array_push($arrayDatos, array($row["IDReserva"], "Barba", $row2['name'], $row["fechaReserva"], "white"));
             } else {
-                array_push($arrayDatos, array($row["IDReserva"], "Barba", $row["NombreReserva"], $row["fechaReserva"]));
+                array_push($arrayDatos, array($row["IDReserva"], "Barba", $row["NombreReserva"], $row["fechaReserva"], "#ffd4d4"));
             }
         }
         usort($arrayDatos, function($a, $b) {

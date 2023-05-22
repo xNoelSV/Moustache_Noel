@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-05-2023 a las 15:54:02
+-- Tiempo de generación: 22-05-2023 a las 17:57:29
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.5
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `moustache`
 --
+CREATE DATABASE IF NOT EXISTS `moustache` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `moustache`;
 
 -- --------------------------------------------------------
 

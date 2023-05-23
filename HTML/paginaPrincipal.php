@@ -72,8 +72,8 @@ include("../PHP/paginaPrincipal/CodigoPaginaPrincipal.php");
                     <img src="../IMG/producto.png" class="img-fluid" style="width: 400px; height: 390px;">
                 </div>
                 <div class="col-12 col-xl-6 p-5">
-                    <h1>¿Quienes somos?</h1>
-                    <p class="mt-5 lead">¡Bienvenido a Moustache!</p>
+                    <h1>¿Quiénes somos?</h1>
+                    <p class="mt-5 lead">¡Bienvenido a Moustache!</p>   
                     <p class="m-0 p-3 lead">En Moustache, nos enorgullece ser mucho más que una simple barbería. Somos un lugar donde la tradición se combina con la modernidad y la atención personalizada. Nuestro objetivo es brindarte una experiencia de afeitado y corte de pelo excepcional, mientras nos aseguramos de que te sientas valorado y cómodo en todo momento.</p>
                 </div>
             </div>
@@ -88,7 +88,7 @@ include("../PHP/paginaPrincipal/CodigoPaginaPrincipal.php");
         <div class="text-center m-0">
             <div class="row align-items-start w-100 m-0">
                 <div class="col-12 col-xl-6 p-3">
-                    <h1>¿Que ofrecemos?</h1>
+                    <h1>¿Qué ofrecemos?</h1>
                     <p class="mt-5 lead"></p>
                     <p class="m-0 p-3 lead">En Moustache, nos dedicamos a brindar servicios de afeitado y corte de pelo excepcionales, donde el cuidado, la atención personalizada y la cercanía con nuestros clientes son nuestra máxima prioridad. Nuestro objetivo es proporcionarte una experiencia de barbería inigualable, donde puedas relajarte, disfrutar y salir luciendo y sintiéndote genial.</p>
                 </div>

@@ -3,16 +3,12 @@ var fechaComoCadena = 0;
 var fechaComoCadenaModificada = 0;
 var fechaComoCadenaInicioSemana = 0;
 var clicks = 0;
-// var horasExpiradas = 0;
-// var diaExpirado = false;
 
 window.onload = cargarFechaInicio();
 function cargarFechaInicio() {
     fechaHoy = Date.now();
     fechaHoyMod = new Date(fechaHoy);
-    //fechaHoyMod.setDate(fechaHoyMod.getDate() + 7);
     fechaComoCadena = new Date(fechaHoy);
-    //fechaComoCadena.setDate(fechaComoCadena.getDate() + 7);
     fechaComoCadenaModificada = new Date(fechaHoy);
     fechaComoCadenaInicioSemana = new Date(fechaHoy);
 }
@@ -66,7 +62,7 @@ function CargarRegistros(accion, servicio) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 5);
         if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMes = meses[new Date(fechaComoCadena).getMonth() - 1];
+            nombreMesModificado = meses[new Date(fechaComoCadena).getMonth() + 1];
         }
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
@@ -74,7 +70,7 @@ function CargarRegistros(accion, servicio) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 4);
         if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMes = meses[new Date(fechaComoCadena).getMonth() - 1];
+            nombreMesModificado = meses[new Date(fechaComoCadena).getMonth() + 1];
         }
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
@@ -82,7 +78,7 @@ function CargarRegistros(accion, servicio) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 3);
         if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMes = meses[new Date(fechaComoCadena).getMonth() - 1];
+            nombreMesModificado = meses[new Date(fechaComoCadena).getMonth() + 1];
         }
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
@@ -90,7 +86,7 @@ function CargarRegistros(accion, servicio) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 2);
         if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMes = meses[new Date(fechaComoCadena).getMonth() - 1];
+            nombreMesModificado = meses[new Date(fechaComoCadena).getMonth() + 1];
         }
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
@@ -98,7 +94,7 @@ function CargarRegistros(accion, servicio) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 1);
         if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMes = meses[new Date(fechaComoCadena).getMonth() - 1];
+            nombreMesModificado = meses[new Date(fechaComoCadena).getMonth() + 1];
         }
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
@@ -117,7 +113,6 @@ function CargarRegistros(accion, servicio) {
         diaActual = "0" + diaActual;
     }
     var horaActual = fechaHoyMod.getHours();
-    //var horaActual = 16;
     if (horaActual < 10) {
         horaActual = "0" + horaActual;
     }

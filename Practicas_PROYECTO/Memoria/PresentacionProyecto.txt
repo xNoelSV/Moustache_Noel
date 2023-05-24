@@ -5,6 +5,5 @@ PUNTOS DE LA PRESENTACIÓN:
 - Objetivos iniciales del proyecto
 - Herramientas usadas
 - Linea temporal del desarrollo del proyecto
-- Conceptos de usabilidad
 - Demo
 - Conclusiones

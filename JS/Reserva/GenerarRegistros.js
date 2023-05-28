@@ -9,6 +9,9 @@ function cargarFechaInicio() {
     fechaHoy = Date.now();
     fechaHoyMod = new Date(fechaHoy);
     fechaComoCadena = new Date(fechaHoy);
+    // MODIFICADORES DE FECHA
+    //fechaComoCadena.setDate(fechaComoCadena.getDate() + 4);
+    //fechaHoyMod.setDate(fechaComoCadena.getDate());
     fechaComoCadenaModificada = new Date(fechaHoy);
     fechaComoCadenaInicioSemana = new Date(fechaHoy);
 }
@@ -37,14 +40,14 @@ function CargarRegistros(accion, servicio) {
         numeroDia = 1;
     }
 
+    // Le da el valor inicial de la semana correspondiente a la fechaComoCadenaInicioSemana
+    fechaComoCadenaInicioSemana = new Date(fechaComoCadena); 
+    fechaComoCadenaInicioSemana.setDate(fechaComoCadenaInicioSemana.getDate() - (numeroDia - 1));
+
     // Selecciona el mes en el que se encuentra
     var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     var nombreMes = meses[new Date(fechaComoCadena).getMonth()];
-    var nombreMesModificado = meses[new Date(fechaComoCadena).getMonth()];
-
-    // Le da el valor inicial de la semana correspondiente a la fechaComoCadenaInicioSemana
-    fechaComoCadenaInicioSemana.setDate(fechaComoCadena.getDate() - (numeroDia - 1));
-    fechaComoCadenaInicioSemana.setMonth(fechaComoCadena.getMonth());
+    var nombreMesModificado = meses[new Date(fechaComoCadenaInicioSemana).getMonth()];
 
     // Se le da el valor del primer dia de la semana a la cadena
     var stringFecha = parseInt(fechaComoCadenaInicioSemana.getDate());
@@ -55,6 +58,9 @@ function CargarRegistros(accion, servicio) {
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 6);
         if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
             nombreMesModificado = meses[new Date(fechaComoCadenaInicioSemana).getMonth() + 1];
+            if (fechaComoCadena.getDate() < fechaComoCadenaInicioSemana.getDate()) {
+                nombreMes = meses[new Date(fechaComoCadena).getMonth() - 1];
+            }
         }
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
@@ -62,7 +68,10 @@ function CargarRegistros(accion, servicio) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 5);
         if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMesModificado = meses[new Date(fechaComoCadena).getMonth() + 1];
+            nombreMesModificado = meses[new Date(fechaComoCadenaInicioSemana).getMonth() + 1];
+            if (fechaComoCadena.getDate() < fechaComoCadenaInicioSemana.getDate()) {
+                nombreMes = meses[new Date(fechaComoCadena).getMonth() - 1];
+            }
         }
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
@@ -70,7 +79,10 @@ function CargarRegistros(accion, servicio) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 4);
         if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMesModificado = meses[new Date(fechaComoCadena).getMonth() + 1];
+            nombreMesModificado = meses[new Date(fechaComoCadenaInicioSemana).getMonth() + 1];
+            if (fechaComoCadena.getDate() < fechaComoCadenaInicioSemana.getDate()) {
+                nombreMes = meses[new Date(fechaComoCadena).getMonth() - 1];
+            }
         }
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
@@ -78,7 +90,10 @@ function CargarRegistros(accion, servicio) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 3);
         if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMesModificado = meses[new Date(fechaComoCadena).getMonth() + 1];
+            nombreMesModificado = meses[new Date(fechaComoCadenaInicioSemana).getMonth() + 1];
+            if (fechaComoCadena.getDate() < fechaComoCadenaInicioSemana.getDate()) {
+                nombreMes = meses[new Date(fechaComoCadena).getMonth() - 1];
+            }
         }
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
@@ -86,7 +101,10 @@ function CargarRegistros(accion, servicio) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 2);
         if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMesModificado = meses[new Date(fechaComoCadena).getMonth() + 1];
+            nombreMesModificado = meses[new Date(fechaComoCadenaInicioSemana).getMonth() + 1];
+            if (fechaComoCadena.getDate() < fechaComoCadenaInicioSemana.getDate()) {
+                nombreMes = meses[new Date(fechaComoCadena).getMonth() - 1];
+            }
         }
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 
@@ -94,7 +112,11 @@ function CargarRegistros(accion, servicio) {
         // Parte superior del calendario (Semana actual)
         fechaComoCadenaModificada.setDate(fechaComoCadena.getDate() + 1);
         if (fechaComoCadenaModificada.getDate() < fechaComoCadenaInicioSemana.getDate()) {
-            nombreMesModificado = meses[new Date(fechaComoCadena).getMonth() + 1];
+            nombreMesModificado = meses[new Date(fechaComoCadenaInicioSemana).getMonth() + 1];
+            console.log(fechaComoCadenaInicioSemana);
+            if (fechaComoCadena.getDate() < fechaComoCadenaInicioSemana.getDate()) {
+                nombreMes = meses[new Date(fechaComoCadena).getMonth() - 1];
+            }
         }
         stringFecha += " de " + nombreMes + " - " + parseInt(fechaComoCadenaModificada.getDate()) + " de " + nombreMesModificado;
 

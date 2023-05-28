@@ -60,7 +60,9 @@ include("../PHP/Reserva/CodigoReserva3.php");
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                         <li><a class="dropdown-item" href="ModificarUsuario.php" onclick="volverReserva()">Modificar usuario</a></li>
-                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
                         <li><a class="dropdown-item" onclick="cerrarSession()">Cerrar sessión</a></li>
                     </ul>
                 </div>
@@ -75,90 +77,10 @@ include("../PHP/Reserva/CodigoReserva3.php");
             <h1>Elige un método de pago</h1>
             <img src="../IMG/separadorDeTexto.png" class="img-fluid pb-5" height="75" width="250" />
 
-            <!-- INFO DE LA RESERVA 
-            <p class="fs-5">Información del pago:</p>
-            <div class="container-fluid mb-5" style="background-color: #e6e6e6; border-radius: 10px;">
-                <div class="row align-items-start border-bottom">
-                    <div class="col">
-                        <strong>Nombre</strong>
-                    </div>
-                    <div class="col">
-                        <strong>Fecha</strong>
-                    </div>
-                    <div class="col">
-                        <strong>Hora</strong>
-                    </div>
-                </div>
-                <div class="row align-items-start">
-                    <div class="col">
-                        ...
-                    </div>
-                    <div class="col">
-                        ...
-                    </div>
-                    <div class="col">
-                        ...
-                    </div>
-                </div>
-                <div class="row align-items-start">
-                    <div class="col"></div>
-                    <div class="col">
-                        <strong>SUBTOTAL</strong>
-                    </div>
-                    <div class="col">
-                        ...
-                    </div>
-                </div>
-            </div>-->
-
-            <!-- INFO DE LA RESERVA 2 -->
-
-
-            <!--
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 mx-auto">
-                        <div class="card shadow-lg">
-                            <div class="card-body">
-                                <h4 class="card-title mb-4">Información del Pago</h4>
-                                <div class="row mb-3">
-                                    <div class="col-6">Monto:</div>
-                                    <div class="col-6 text-end">$500</div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-6">Concepto:</div>
-                                    <div class="col-6 text-end">Pago de Servicios</div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-6">Fecha:</div>
-                                    <div class="col-6 text-end">28/03/2023</div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-6">Número de Tarjeta:</div>
-                                    <div class="col-6 text-end">**** **** **** 1234</div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-6">Titular de la Tarjeta:</div>
-                                    <div class="col-6 text-end">Juan Pérez</div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-6">Correo Electrónico:</div>
-                                    <div class="col-6 text-end">juanperez@gmail.com</div>
-                                </div>
-                                <button class="btn btn-primary w-100">Confirmar Pago</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            -->
-
             <!-- PAGOS DE PAYPAL -->
             <?php if ($_SESSION['servicio'] == "Pelo") { ?>
                 <div id="smart-button-container">
-                    <div style="text-align: center;">
-                        <div id="paypal-button-container"></div>
-                    </div>
+                    <div id="paypal-button-container"></div>
                 </div>
                 <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=EUR" data-sdk-integration-source="button-factory"></script>
                 <script>
@@ -185,16 +107,6 @@ include("../PHP/Reserva/CodigoReserva3.php");
 
                             onApprove: function(data, actions) {
                                 return actions.order.capture().then(function(orderData) {
-
-                                    /* Full available details
-                                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-
-                                    // Show a success message within this page, e.g.
-                                    const element = document.getElementById('paypal-button-container');
-                                    element.innerHTML = '';
-                                    element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                                    */
-
                                     // Or go to another URL:
                                     <?php $_SESSION['pagoRealizado'] = "correcto"; ?>
                                     actions.redirect('Reserva4.php');
@@ -209,11 +121,10 @@ include("../PHP/Reserva/CodigoReserva3.php");
                     }
                     initPayPalButton();
                 </script>
+
             <?php } else if ($_SESSION['servicio'] == "Barba") { ?>
                 <div id="smart-button-container">
-                    <div style="text-align: center;">
-                        <div id="paypal-button-container"></div>
-                    </div>
+                    <div id="paypal-button-container"></div>
                 </div>
                 <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=EUR" data-sdk-integration-source="button-factory"></script>
                 <script>
@@ -224,7 +135,6 @@ include("../PHP/Reserva/CodigoReserva3.php");
                                 color: 'gold',
                                 layout: 'vertical',
                                 label: 'pay',
-
                             },
 
                             createOrder: function(data, actions) {
@@ -242,15 +152,6 @@ include("../PHP/Reserva/CodigoReserva3.php");
                             onApprove: function(data, actions) {
                                 return actions.order.capture().then(function(orderData) {
 
-                                    /* Full available details
-                                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-
-                                    // Show a success message within this page, e.g.
-                                    const element = document.getElementById('paypal-button-container');
-                                    element.innerHTML = '';
-                                    element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                                    */
-
                                     // Or go to another URL:
                                     <?php $_SESSION['pagoRealizado'] = "correcto"; ?>
                                     actions.redirect('Reserva4.php');
@@ -265,6 +166,7 @@ include("../PHP/Reserva/CodigoReserva3.php");
                     }
                     initPayPalButton();
                 </script>
+
             <?php } ?>
 
             <form method="POST">

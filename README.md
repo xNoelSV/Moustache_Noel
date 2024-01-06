@@ -39,7 +39,7 @@ Este proyecto, realizado de forma individual en un período de 3 meses, ha sido 
 Para desplegar la aplicación, sigue estos pasos:
 
 1. Clona este repositorio en tu servidor web.
-2. Configura la base de datos con el script proporcionado en `database.sql`.
+2. Configura la base de datos con el script proporcionado en `moustache.sql`.
 3. Asegúrate de tener un servidor web configurado con soporte para PHP.
 4. Abre la aplicación en tu navegador preferido.
 
